@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Eco EV, Modimolle. Geely electric, plug-in hybrid and petrol vehicles for straight purchase.">
+<meta name="description" content="Eco EV, Modimolle. Riddara RD6 electric bakkie and the Geely range, for straight purchase.">
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
 <title>Eco EV Modimolle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,7 +67,8 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0
 .hero-side{display:grid;gap:22px;padding-bottom:8px}
 .hero-side p{margin:0;color:var(--mute);max-width:42ch}
 .hero-side .ctas{display:flex;flex-wrap:wrap;gap:12px}
-.hero-car{margin-top:24px;position:relative}
+.hero-car{margin-top:24px;position:relative;padding:0;min-height:0}
+.hero-side .price .amt{font-size:clamp(32px,3.4vw,44px)}
 .hero-car svg{width:100%;height:auto;display:block;max-width:1200px;margin-inline:auto}
 .hero-tag{position:absolute;font-family:var(--f-num);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:10px}
 .hero-tag b{color:var(--ink);font-weight:500;font-size:20px;letter-spacing:.02em}
@@ -130,6 +131,15 @@ section{padding-block:clamp(70px,10vw,130px)}
 @media (max-width:900px){.model,.model:nth-child(even){grid-template-columns:1fr}.model:nth-child(even) .m-info{order:0}.m-visual{order:-1;min-height:200px}}
 @media (max-width:420px){.specs{grid-template-columns:1fr}}
 
+/* photos replace renders when present */
+.m-visual .photo{display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.m-visual.has-photo .photo{display:block}
+.m-visual.has-photo .swap,.m-visual.has-photo .big{display:none}
+.hero-car.has-photo{aspect-ratio:21/9;max-width:100%}
+.hero-car.has-photo .hero-tag{z-index:1;text-shadow:0 1px 8px #000}
+.swap{width:100%;display:grid;place-items:center;animation:swapIn .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes swapIn{from{opacity:.35;transform:translateX(-18px)}}
+.model .slot{color:var(--k);opacity:.75}
 /* car svg traces */
 .trace-pulse{stroke-dasharray:140 1900;animation:pulse 5.5s linear infinite}
 @keyframes pulse{to{stroke-dashoffset:-2040}}
@@ -211,26 +221,27 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
     <div class="wrap">
       <div class="hero-copy">
         <div>
-          <div class="eyebrow">Eco EV · Modimolle, Limpopo · Geely range</div>
-          <h1 id="h1">The future<br>pulls into <em>Modimolle.</em></h1>
+          <div class="eyebrow">Eco EV · Modimolle · Flagship</div>
+          <h1 id="h1">Riddara RD6<br><em>Apex 4WD.</em></h1>
         </div>
         <div class="hero-side">
-          <p>Geely electric, plug-in hybrid and turbo petrol vehicles, sold as a straight purchase. Five model lines, from a city EV to a 315&nbsp;kW electric bakkie.</p>
+          <p>An electric double cab with 315&nbsp;kW and 595&nbsp;Nm from two motors. Second only to the BYD Shark&nbsp;6 for power among South African bakkies, with up to 3&nbsp;000&nbsp;kg towing and no fuel bill.</p>
+          <div class="price"><span class="amt num">R 781 900</span><span class="note">Straight purchase</span></div>
           <div class="ctas">
-            <a href="#models" class="btn">Explore the range</a>
-            <a href="#reserve" class="btn ghost">Reserve a car</a>
+            <a href="#reserve" class="btn" data-res="rd6" data-di="2">Reserve the Apex</a>
+            <a href="#models" class="btn ghost">Explore the range</a>
           </div>
         </div>
       </div>
-      <div class="hero-car" id="heroCar">
-        <div class="hero-tag t1">Range <b class="num">450 km</b></div>
-        <div class="hero-tag t2">DC 30–80% <b class="num">≈ 20 min</b></div>
+      <div class="hero-car m-visual" id="heroCar">
+        <div class="hero-tag t1">Power <b class="num">315 kW</b></div>
+        <div class="hero-tag t2">Torque <b class="num">595 Nm</b></div>
       </div>
       <div class="stats">
-        <div class="stat"><div class="v num"><small>R</small>339 900</div><div class="l">Entry price · Geely E2 Aspire</div></div>
-        <div class="stat"><div class="v num">450<small>KM</small></div><div class="l">Longest range · E5 Apex Plus (WLTP)</div></div>
-        <div class="stat"><div class="v num">315<small>KW</small></div><div class="l">Riddara RD6 Apex 4WD</div></div>
-        <div class="stat"><div class="v num">8<small>YR</small></div><div class="l">Battery warranty · E2 &amp; E5</div></div>
+        <div class="stat"><div class="v num">315<small>KW</small></div><div class="l">Dual-motor output</div></div>
+        <div class="stat"><div class="v num">595<small>NM</small></div><div class="l">Instant torque</div></div>
+        <div class="stat"><div class="v num">3 000<small>KG</small></div><div class="l">Towing, up to</div></div>
+        <div class="stat"><div class="v num">73<small>KWH</small></div><div class="l">LFP battery</div></div>
       </div>
     </div>
   </section>
@@ -282,11 +293,11 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
       <div class="reserve-copy">
         <div class="eyebrow">Reserve</div>
         <h2 id="resh">Put your name on one.</h2>
-        <p class="fine" style="font-size:16px">No payment today. Tell us which car you want and we send you a firm quote.</p>
+        <p class="fine" style="font-size:16px">No payment today. Reserve your car, get a firm quote, then order and pay by EFT. We deliver.</p>
         <ol class="steps">
           <li><span><b>Reserve online</b>Choose the model and derivative.</span></li>
-          <li><span><b>Firm quote</b>We confirm price, colour and delivery date from Geely stock.</span></li>
-          <li><span><b>Straight purchase</b>Pay by EFT and take delivery in Modimolle.</span></li>
+          <li><span><b>Firm quote</b>We confirm price, colour and delivery lead time.</span></li>
+          <li><span><b>Order and pay</b>Pay by EFT to place your order. We deliver your car within the agreed lead time.</span></li>
         </ol>
       </div>
       <form id="resForm" name="reservation" method="POST" data-netlify="true" netlify-honeypot="company" novalidate>
@@ -300,7 +311,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
         <fieldset class="full">
           <legend>How will you pay?</legend>
           <div class="pay">
-            <label for="payCash"><input type="radio" name="pay" id="payCash" value="Straight purchase" checked><span>Straight purchase<small>EFT on delivery</small></span></label>
+            <label for="payCash"><input type="radio" name="pay" id="payCash" value="Straight purchase" checked><span>Straight purchase<small>Order and pay by EFT, then we deliver</small></span></label>
             <label for="payFin"><input type="radio" name="pay" id="payFin" value="Finance (interested)"><span>Finance<small>Coming soon. We'll let you know.</small></span></label>
           </div>
         </fieldset>
@@ -336,6 +347,17 @@ const R = n => 'R ' + n.toLocaleString('en-ZA').replace(/,/g,' ').replace(/ /g,
 
 /* ---------- vehicle data ---------- */
 const MODELS = [
+ {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
+  blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload and up to 3 000 kg towing, with no fuel bill.',
+  labels:{range:'Range',power:'Power',accel:'Drive',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
+  derivs:[
+   {n:'Econ 2WD',price:611900,rangeKm:314,range:'314 km',power:'Rear motor',accel:'RWD',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'Confirm on quote',
+    feat:['Rear-wheel drive','Unibody double cab','1 115 kg payload','2 500 kg towing']},
+   {n:'Econ 4WD',price:681900,rangeKm:332,range:'332 km',power:'280 kW / 485 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'Confirm on quote',
+    feat:['Dual-motor all-wheel drive','Sand, Mud, Off-road and Wading modes','1 235 kg payload','3 000 kg towing']},
+   {n:'Apex 4WD',price:781900,rangeKm:null,range:'Confirm on quote',power:'315 kW / 595 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'Up to 3 000 kg tow',cover:'Confirm on quote',
+    feat:['Second most powerful bakkie in SA','14.6" centre screen, 10.2" cluster','Dual-motor all-wheel drive','Up to 3 000 kg towing']}
+  ]},
  {id:'e2',name:'E2',kind:'ev',groups:['ev'],body:'hatch',badge:'Electric',tag:'City electric hatch',
   blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, a 70-litre front trunk and a home wallbox in the price.",
   labels:{range:'Range',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Fast charge',cover:'Battery warranty'},
@@ -376,17 +398,6 @@ const MODELS = [
    {n:'Apex Plus',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% ≈ 20 min',cover:'6 yr / 150 000 km',
     feat:['Head-up display and panoramic roof','1 000 W, 16-speaker Flyme audio','Heated, ventilated, massage front seats','19" alloys, powered tailgate']}
   ]},
- {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
-  blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload and up to 3 000 kg towing, with no fuel bill.',
-  labels:{range:'Range',power:'Power',accel:'Drive',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
-  derivs:[
-   {n:'Econ 2WD',price:611900,rangeKm:314,range:'314 km',power:'Rear motor',accel:'RWD',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'Confirm on quote',
-    feat:['Rear-wheel drive','Unibody double cab','1 115 kg payload','2 500 kg towing']},
-   {n:'Econ 4WD',price:681900,rangeKm:332,range:'332 km',power:'280 kW / 485 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'Confirm on quote',
-    feat:['Dual-motor all-wheel drive','Sand, Mud, Off-road and Wading modes','1 235 kg payload','3 000 kg towing']},
-   {n:'Apex 4WD',price:781900,rangeKm:null,range:'Confirm on quote',power:'315 kW / 595 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'Up to 3 000 kg tow',cover:'Confirm on quote',
-    feat:['Second most powerful bakkie in SA','14.6" centre screen, 10.2" cluster','Dual-motor all-wheel drive','Up to 3 000 kg towing']}
-  ]}
 ];
 const COLORS={ev:'#7fe3ff',phev:'#a98cff',petrol:'#ffb45c'};
 
@@ -411,18 +422,20 @@ const SHAPES={
 };
 let uid=0;
 function carSVG(shapeKey,color,opts={}){
-  const s=SHAPES[shapeKey],id='c'+(++uid);
+  const s=SHAPES[shapeKey],id='c'+(++uid),spokes=opts.spokes||5,drive=opts.drive||'';
   const wheels=s.w.map(x=>`
     <circle cx="${x}" cy="166" r="${s.r}" fill="#05070b" stroke="${color}" stroke-width="1.4" filter="url(#${id}g)"/>
     <circle cx="${x}" cy="166" r="${s.r*0.62}" fill="none" stroke="${color}" stroke-opacity=".55" stroke-width="1"/>
-    ${[0,72,144,216,288].map(a=>{const r1=s.r*0.18,r2=s.r*0.6,t=a*Math.PI/180;return `<line x1="${(x+r1*Math.cos(t)).toFixed(1)}" y1="${(166+r1*Math.sin(t)).toFixed(1)}" x2="${(x+r2*Math.cos(t+.25)).toFixed(1)}" y2="${(166+r2*Math.sin(t+.25)).toFixed(1)}" stroke="${color}" stroke-opacity=".5" stroke-width="1"/>`}).join('')}
+    ${Array.from({length:spokes},(_,k)=>k*360/spokes).map(a=>{const r1=s.r*0.18,r2=s.r*0.6,t=a*Math.PI/180;return `<line x1="${(x+r1*Math.cos(t)).toFixed(1)}" y1="${(166+r1*Math.sin(t)).toFixed(1)}" x2="${(x+r2*Math.cos(t+.25)).toFixed(1)}" y2="${(166+r2*Math.sin(t+.25)).toFixed(1)}" stroke="${color}" stroke-opacity=".5" stroke-width="1"/>`}).join('')}
     <circle cx="${x}" cy="166" r="3" fill="${color}"/>`).join('');
+  const motors=(drive==='4wd'?s.w:drive==='rwd'?[s.w[0]]:[]).map(x=>`<circle cx="${x}" cy="166" r="${s.r+7}" fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="3 5" opacity=".8" filter="url(#${id}g)"/>`).join('')
+    +(drive==='4wd'?`<line x1="${s.w[0]}" y1="190" x2="${s.w[1]}" y2="190" stroke="${color}" stroke-opacity=".5" stroke-dasharray="2 6"/>`:'');
   const car=`
     <path d="${s.body}" fill="url(#${id}f)" stroke="${color}" stroke-width="1.6" stroke-linejoin="round" filter="url(#${id}g)"/>
     <path d="${s.glass}" fill="url(#${id}w)" stroke="${color}" stroke-opacity=".7" stroke-width="1"/>
     ${s.lines.map(d=>`<path d="${d}" fill="none" stroke="${color}" stroke-opacity=".45" stroke-width="1"/>`).join('')}
     <path class="trace-pulse" d="${s.body}" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" filter="url(#${id}g)"/>
-    ${wheels}`;
+    ${wheels}${motors}`;
   return `<svg viewBox="0 0 620 300" role="img" aria-label="${opts.label||'Vehicle render'}">
    <defs>
     <linearGradient id="${id}f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${color}" stop-opacity=".16"/><stop offset=".7" stop-color="${color}" stop-opacity=".03"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient>
@@ -439,11 +452,15 @@ function carSVG(shapeKey,color,opts={}){
   </svg>`;
 }
 
+const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function variant(m,i){const n=m.derivs[i].n;return {spokes:[5,6,10][i]||5,drive:/4wd/i.test(n)?'4wd':/2wd/i.test(n)?'rwd':''}}
+function photo(m,d){return `<img class="photo" alt="${m.name} ${d.n}" src="images/${m.id}-${slug(d.n)}.jpg" data-fb="images/${m.id}.jpg" onload="this.parentNode.classList.add('has-photo')" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.remove()}">`}
+window.__photo=photo;
 /* hero car */
-document.getElementById('heroCar').insertAdjacentHTML('beforeend',carSVG('suv','#7fe3ff',{label:'Light-traced render of a midsize electric SUV'}));
+document.getElementById('heroCar').insertAdjacentHTML('beforeend',`<div class="swap">${carSVG('bakkie','#7fe3ff',{label:'Light-traced render of the Riddara RD6 Apex 4WD',spokes:10,drive:'4wd'})}</div><img class="photo" alt="Riddara RD6 Apex 4WD" src="images/hero.jpg" data-fb="images/rd6-apex-4wd.jpg" onload="this.parentNode.classList.add('has-photo')" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.remove()}">`);
 
 /* ---------- model stages ---------- */
-const state={}; MODELS.forEach(m=>state[m.id]=m.derivs.length-1>0?0:0);
+const state={}; MODELS.forEach(m=>state[m.id]=0); state.rd6=2;
 const list=document.getElementById('modelList');
 function specHTML(m,d){
   const L=m.labels;
@@ -470,9 +487,10 @@ function renderModel(m){
       </div>
     </div>
     <div class="m-visual">
-      <span class="big" aria-hidden="true">${m.name.split(' ')[0]}</span>
-      ${carSVG(m.body,COLORS[m.kind],{label:`Light-traced render of the ${m.name}`})}
-      <span class="slot">Render · official photography to follow</span>
+      <span class="big" aria-hidden="true">${d.n.split(' ')[0]}</span>
+      <div class="swap">${carSVG(m.body,COLORS[m.kind],{label:`Light-traced render of the ${m.name} ${d.n}`,...variant(m,state[m.id])})}</div>
+      ${photo(m,d)}
+      <span class="slot">${m.name} ${d.n}</span>
     </div>
   </article>`;
 }
@@ -484,8 +502,6 @@ list.addEventListener('click',e=>{
   if(b){state[b.dataset.m]=+b.dataset.i;const m=MODELS.find(x=>x.id===b.dataset.m);
     const el=document.getElementById('m-'+m.id);el.outerHTML=renderModel(m);
     document.querySelector(`#m-${m.id} .deriv[data-i="${b.dataset.i}"]`).focus();applyFilter();return}
-  const r=e.target.closest('[data-res]');
-  if(r){fModel.value=r.dataset.res;fillDerivs();fDeriv.value=state[r.dataset.res]}
   const c=e.target.closest('[data-cmp]');
   if(c){const sel=document.getElementById('cmp0');sel.value=c.dataset.cmp+':'+state[c.dataset.cmp];drawCompare()}
 });
@@ -500,7 +516,7 @@ function applyFilter(){list.querySelectorAll('.model').forEach(el=>{el.hidden=!(
 
 /* ---------- compare ---------- */
 const ALL=[];MODELS.forEach(m=>m.derivs.forEach((d,i)=>ALL.push({key:m.id+':'+i,m,d,label:m.name+' '+d.n})));
-const defaults=['e2:1','e5:2','rd6:1'];
+const defaults=['rd6:2','e5:2','e2:1'];
 const pick=document.getElementById('cmpPick');
 pick.innerHTML=[0,1,2].map(i=>`<label for="cmp${i}">Vehicle ${i+1}<select id="cmp${i}">${ALL.map(a=>`<option value="${a.key}">${a.label}</option>`).join('')}</select></label>`).join('');
 [0,1,2].forEach(i=>{const s=document.getElementById('cmp'+i);s.value=defaults[i];s.addEventListener('change',drawCompare)});
@@ -529,7 +545,7 @@ drawCompare();
 const fModel=document.getElementById('fModel'),fDeriv=document.getElementById('fDeriv');
 fModel.innerHTML=MODELS.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
 function fillDerivs(){const m=MODELS.find(x=>x.id===fModel.value);fDeriv.innerHTML=m.derivs.map((d,i)=>`<option value="${i}">${d.n} · ${R(d.price)}</option>`).join('')}
-fModel.addEventListener('change',fillDerivs);fillDerivs();fModel.value='e5';fillDerivs();
+fModel.addEventListener('change',fillDerivs);fModel.value='rd6';fillDerivs();fDeriv.value='2';
 const form=document.getElementById('resForm'),done=document.getElementById('done'),err=document.getElementById('fErr');
 form.addEventListener('submit',e=>{
   e.preventDefault();
@@ -559,6 +575,8 @@ form.addEventListener('submit',e=>{
     .then(r=>show(r.ok)).catch(()=>show(false))
     .finally(()=>{btn.disabled=false;btn.textContent='Reserve this car'});
 });
+
+document.addEventListener('click',e=>{const r=e.target.closest('[data-res]');if(!r)return;fModel.value=r.dataset.res;fillDerivs();fDeriv.value=r.dataset.di??state[r.dataset.res]});
 
 /* ---------- nav ---------- */
 const nav=document.getElementById('nav');
