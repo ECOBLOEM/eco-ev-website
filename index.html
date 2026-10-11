@@ -289,12 +289,14 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
           <li><span><b>Straight purchase</b>Pay by EFT and take delivery in Modimolle.</span></li>
         </ol>
       </div>
-      <form id="resForm" novalidate>
-        <label for="fName">Full name<input id="fName" autocomplete="name" required></label>
-        <label for="fPhone">Mobile number<input id="fPhone" type="tel" autocomplete="tel" inputmode="tel" required></label>
-        <label for="fEmail" class="full">Email<input id="fEmail" type="email" autocomplete="email"></label>
-        <label for="fModel">Model<select id="fModel"></select></label>
-        <label for="fDeriv">Derivative<select id="fDeriv"></select></label>
+      <form id="resForm" name="reservation" method="POST" data-netlify="true" netlify-honeypot="company" novalidate>
+        <input type="hidden" name="form-name" value="reservation"><input type="hidden" name="ref" id="fRef"><input type="hidden" name="price" id="fPrice">
+        <p hidden><label>Leave empty<input name="company" tabindex="-1" autocomplete="off"></label></p>
+        <label for="fName">Full name<input id="fName" name="name" autocomplete="name" required></label>
+        <label for="fPhone">Mobile number<input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+        <label for="fEmail" class="full">Email<input id="fEmail" name="email" type="email" autocomplete="email"></label>
+        <label for="fModel">Model<select id="fModel" name="model"></select></label>
+        <label for="fDeriv">Derivative<select id="fDeriv" name="derivative"></select></label>
         <fieldset class="full">
           <legend>How will you pay?</legend>
           <div class="pay">
@@ -302,7 +304,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
             <label for="payFin"><input type="radio" name="pay" id="payFin" value="Finance (interested)"><span>Finance<small>Coming soon. We'll let you know.</small></span></label>
           </div>
         </fieldset>
-        <label for="fNote" class="full">Anything else<textarea id="fNote" rows="3" placeholder="Preferred colour, trade-in, timing"></textarea></label>
+        <label for="fNote" class="full">Anything else<textarea id="fNote" name="notes" rows="3" placeholder="Preferred colour, trade-in, timing"></textarea></label>
         <div class="full" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
           <span class="err" id="fErr" role="alert"></span>
           <button class="btn" type="submit">Reserve this car</button>
@@ -539,16 +541,23 @@ form.addEventListener('submit',e=>{
   const ref='ECO-'+Math.random().toString(36).slice(2,7).toUpperCase();
   const pay=form.querySelector('input[name=pay]:checked').value;
   const summary=`Reservation ${ref}\n${m.name} ${d.n} · ${R(d.price)}\nPayment: ${pay}\nName: ${name}\nMobile: ${phone}\nEmail: ${document.getElementById('fEmail').value.trim()||'—'}\nNotes: ${document.getElementById('fNote').value.trim()||'—'}`;
-  done.hidden=false;
-  done.innerHTML=`<div class="eyebrow">Reservation prepared</div><div class="ref">${ref}</div>
-    <p class="fine">Preview site: online reservations switch on at launch. Your details below are ready to share with the Eco EV team.</p>
-    <pre id="sum"></pre><div><button type="button" class="btn ghost" id="copy">Copy details</button></div>`;
-  document.getElementById('sum').textContent=summary;
-  document.getElementById('copy').addEventListener('click',ev=>{
-    navigator.clipboard.writeText(summary).then(()=>{ev.target.textContent='Copied'}).catch(()=>{
-      const r=document.createRange();r.selectNodeContents(document.getElementById('sum'));const s=getSelection();s.removeAllRanges();s.addRange(r);ev.target.textContent='Selected, press copy'});
-  });
-  done.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('fRef').value=ref;document.getElementById('fPrice').value=R(d.price);
+  const body=new URLSearchParams(new FormData(form));body.set('model',m.name);body.set('derivative',d.n);
+  const btn=form.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Sending…';
+  const show=ok=>{
+    done.hidden=false;
+    done.innerHTML=ok
+      ?`<div class="eyebrow">Reservation received</div><div class="ref">${ref}</div><p class="fine">Thank you. The Eco EV team will contact you on the number you gave to confirm your quote. Keep this reference.</p><pre id="sum"></pre>`
+      :`<div class="eyebrow">Not sent</div><div class="ref">${ref}</div><p class="fine">Your reservation didn't go through. Check your connection and try again, or copy the details and send them to us.</p><pre id="sum"></pre><div><button type="button" class="btn ghost" id="copy">Copy details</button></div>`;
+    document.getElementById('sum').textContent=summary;
+    const cp=document.getElementById('copy');
+    if(cp)cp.addEventListener('click',()=>{navigator.clipboard.writeText(summary).then(()=>{cp.textContent='Copied'}).catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('sum'));const sl=getSelection();sl.removeAllRanges();sl.addRange(r);cp.textContent='Selected, press copy'})});
+    if(ok){form.querySelectorAll('input:not([type=hidden]):not([type=radio]),textarea').forEach(i=>i.value='')}
+    done.scrollIntoView({behavior:'smooth',block:'nearest'});
+  };
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()})
+    .then(r=>show(r.ok)).catch(()=>show(false))
+    .finally(()=>{btn.disabled=false;btn.textContent='Reserve this car'});
 });
 
 /* ---------- nav ---------- */
