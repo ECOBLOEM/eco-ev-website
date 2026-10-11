@@ -411,7 +411,7 @@ const MODELS = [
     feat:['15.4" touchscreen, 10.2" digital cluster','Wireless charging and voice control','Home wallbox included','6 yr / 120 000 km service plan']},
    {n:'Apex Plus',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% ≈ 20 min',cover:'6 yr / 150 000 km',
     feat:['Head-up display and panoramic roof','1 000 W, 16-speaker Flyme audio','Heated, ventilated, massage front seats','19" alloys, powered tailgate']}
-  ]},,
+  ]},
  {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
   blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload and up to 3 000 kg towing, with no fuel bill.',
   labels:{range:'Range',power:'Power',accel:'Drive',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
@@ -485,6 +485,7 @@ window.__photo=photo;
 document.getElementById('heroCar').insertAdjacentHTML('beforeend',`<div class="swap">${carSVG('bakkie','#7fe3ff',{label:'Light-traced render of the Riddara RD6 Apex 4WD',spokes:10,drive:'4wd'})}</div><img class="photo" alt="Riddara RD6 Apex 4WD" src="images/hero.jpg" data-fb="images/rd6-apex-4wd.jpg" onload="this.parentNode.classList.add('has-photo')" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.remove()}">`);
 
 /* ---------- model stages ---------- */
+let filter='all';
 const state={}; MODELS.forEach(m=>state[m.id]=0); state.rd6=2;
 const list=document.getElementById('modelList');
 function specHTML(m,d){
@@ -531,7 +532,6 @@ list.addEventListener('click',e=>{
   if(c){const sel=document.getElementById('cmp0');sel.value=c.dataset.cmp+':'+state[c.dataset.cmp];drawCompare()}
 });
 
-let filter='all';
 const filters=document.getElementById('filters');
 filters.addEventListener('click',e=>{
   const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.f;
