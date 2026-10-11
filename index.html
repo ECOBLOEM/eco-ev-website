@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Eco EV, Modimolle. Riddara RD6 electric bakkie and the Geely range, for straight purchase.">
+<meta name="description" content="Eco EV, Modimolle. The Geely Riddara RD6 electric bakkie and the Geely range, for straight purchase.">
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
 <title>Eco EV Modimolle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -89,6 +89,17 @@ section{padding-block:clamp(70px,10vw,130px)}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
 .sec-head h2{font-size:clamp(26px,3.6vw,48px);margin-top:12px;max-width:18ch}
 .sec-head p{color:var(--mute);max-width:46ch;margin:0}
+
+/* WHY GEELY */
+.geely{padding-block:clamp(50px,7vw,90px);border-bottom:1px solid var(--line)}
+.geely-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.geely h2{font-size:clamp(22px,2.8vw,36px);margin-top:12px}
+.geely-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.geely-facts div{border-top:1px solid var(--ice);padding-top:14px;min-width:0}
+.geely-facts b{font-family:var(--f-display);font-weight:400;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.geely-facts p{margin:8px 0 0;color:var(--mute);font-size:15px}
+@media (max-width:900px){.geely-in{grid-template-columns:1fr}}
+@media (max-width:600px){.geely-facts{grid-template-columns:1fr}}
 
 /* FILTERS */
 .filters{display:flex;flex-wrap:wrap;gap:8px}
@@ -221,11 +232,11 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
     <div class="wrap">
       <div class="hero-copy">
         <div>
-          <div class="eyebrow">Eco EV · Modimolle · Flagship</div>
+          <div class="eyebrow">Geely · Riddara · Eco EV Modimolle</div>
           <h1 id="h1">Riddara RD6<br><em>Apex 4WD.</em></h1>
         </div>
         <div class="hero-side">
-          <p>An electric double cab with 315&nbsp;kW and 595&nbsp;Nm from two motors. Second only to the BYD Shark&nbsp;6 for power among South African bakkies, with up to 3&nbsp;000&nbsp;kg towing and no fuel bill.</p>
+          <p>Riddara is the electric bakkie brand of the Geely group. The RD6 Apex puts 315&nbsp;kW and 595&nbsp;Nm through two motors and all four wheels, making it one of the most powerful bakkies on sale in South Africa. It tows up to 3&nbsp;000&nbsp;kg and never needs diesel.</p>
           <div class="price"><span class="amt num">R 781 900</span><span class="note">Straight purchase</span></div>
           <div class="ctas">
             <a href="#reserve" class="btn" data-res="rd6" data-di="2">Reserve the Apex</a>
@@ -242,6 +253,20 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
         <div class="stat"><div class="v num">595<small>NM</small></div><div class="l">Instant torque</div></div>
         <div class="stat"><div class="v num">3 000<small>KG</small></div><div class="l">Towing, up to</div></div>
         <div class="stat"><div class="v num">73<small>KWH</small></div><div class="l">LFP battery</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="geely" aria-labelledby="gh">
+    <div class="wrap geely-in">
+      <div>
+        <div class="eyebrow">Why Geely</div>
+        <h2 id="gh">Built by one of the world's largest car groups.</h2>
+      </div>
+      <div class="geely-facts">
+        <div><b>The group</b><p>Geely is the Chinese automotive group behind Volvo Cars, Polestar, Lotus and Zeekr.</p></div>
+        <div><b>Proven sellers</b><p>The E2 was China's best-selling vehicle of 2025.</p></div>
+        <div><b>In South Africa</b><p>Geely returned to South Africa in November 2025 and now offers electric, plug-in hybrid, petrol and bakkie models.</p></div>
       </div>
     </div>
   </section>
@@ -347,17 +372,6 @@ const R = n => 'R ' + n.toLocaleString('en-ZA').replace(/,/g,' ').replace(/ /g,
 
 /* ---------- vehicle data ---------- */
 const MODELS = [
- {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
-  blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload and up to 3 000 kg towing, with no fuel bill.',
-  labels:{range:'Range',power:'Power',accel:'Drive',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
-  derivs:[
-   {n:'Econ 2WD',price:611900,rangeKm:314,range:'314 km',power:'Rear motor',accel:'RWD',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'Confirm on quote',
-    feat:['Rear-wheel drive','Unibody double cab','1 115 kg payload','2 500 kg towing']},
-   {n:'Econ 4WD',price:681900,rangeKm:332,range:'332 km',power:'280 kW / 485 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'Confirm on quote',
-    feat:['Dual-motor all-wheel drive','Sand, Mud, Off-road and Wading modes','1 235 kg payload','3 000 kg towing']},
-   {n:'Apex 4WD',price:781900,rangeKm:null,range:'Confirm on quote',power:'315 kW / 595 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'Up to 3 000 kg tow',cover:'Confirm on quote',
-    feat:['Second most powerful bakkie in SA','14.6" centre screen, 10.2" cluster','Dual-motor all-wheel drive','Up to 3 000 kg towing']}
-  ]},
  {id:'e2',name:'E2',kind:'ev',groups:['ev'],body:'hatch',badge:'Electric',tag:'City electric hatch',
   blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, a 70-litre front trunk and a home wallbox in the price.",
   labels:{range:'Range',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Fast charge',cover:'Battery warranty'},
@@ -397,7 +411,18 @@ const MODELS = [
     feat:['15.4" touchscreen, 10.2" digital cluster','Wireless charging and voice control','Home wallbox included','6 yr / 120 000 km service plan']},
    {n:'Apex Plus',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% ≈ 20 min',cover:'6 yr / 150 000 km',
     feat:['Head-up display and panoramic roof','1 000 W, 16-speaker Flyme audio','Heated, ventilated, massage front seats','19" alloys, powered tailgate']}
-  ]},
+  ]},,
+ {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
+  blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload and up to 3 000 kg towing, with no fuel bill.',
+  labels:{range:'Range',power:'Power',accel:'Drive',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
+  derivs:[
+   {n:'Econ 2WD',price:611900,rangeKm:314,range:'314 km',power:'Rear motor',accel:'RWD',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'Confirm on quote',
+    feat:['Rear-wheel drive','Unibody double cab','1 115 kg payload','2 500 kg towing']},
+   {n:'Econ 4WD',price:681900,rangeKm:332,range:'332 km',power:'280 kW / 485 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'Confirm on quote',
+    feat:['Dual-motor all-wheel drive','Sand, Mud, Off-road and Wading modes','1 235 kg payload','3 000 kg towing']},
+   {n:'Apex 4WD',price:781900,rangeKm:null,range:'Confirm on quote',power:'315 kW / 595 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'Up to 3 000 kg tow',cover:'Confirm on quote',
+    feat:['One of the most powerful bakkies in SA','14.6" centre screen, 10.2" cluster','Dual-motor all-wheel drive','Up to 3 000 kg towing']}
+  ]}
 ];
 const COLORS={ev:'#7fe3ff',phev:'#a98cff',petrol:'#ffb45c'};
 
