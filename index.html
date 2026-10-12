@@ -6,6 +6,24 @@
 <meta name="description" content="Eco EV, Limpopo. The Geely Riddara RD6 electric bakkie and the Geely range, for straight purchase.">
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
 <title>Eco EV | Limpopo</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<!-- Share preview (WhatsApp, Facebook, X). Link previews need absolute URLs:
+     change https://zesty-marzipan-e0d1ee.netlify.app below when the site moves to our own domain. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eco EV">
+<meta property="og:url" content="https://zesty-marzipan-e0d1ee.netlify.app/">
+<meta property="og:title" content="Eco EV | Geely in Limpopo">
+<meta property="og:description" content="Geely electric and plug-in hybrid vehicles, including the Riddara RD6 electric bakkie. Free home charger installation, T&amp;Cs apply.">
+<meta property="og:image" content="https://zesty-marzipan-e0d1ee.netlify.app/images/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Geely Riddara RD6 electric bakkie in blue, with the Eco EV logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eco EV | Geely in Limpopo">
+<meta name="twitter:description" content="Geely electric and plug-in hybrid vehicles, including the Riddara RD6 electric bakkie. Free home charger installation, T&amp;Cs apply.">
+<meta name="twitter:image" content="https://zesty-marzipan-e0d1ee.netlify.app/images/og-share.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600&display=swap">
@@ -256,7 +274,33 @@ legend{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--
 @media (max-width:900px){.reserve{grid-template-columns:1fr}}
 @media (max-width:560px){form,.pay{grid-template-columns:1fr}}
 
-footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px calc(56px + env(safe-area-inset-bottom,0px))}
+/* CONTACT + WHATSAPP */
+.contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.25fr);gap:18px}
+.c-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:28px 26px;display:grid;gap:8px;align-content:start;min-width:0}
+.c-card h3{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.c-card p{margin:0}
+.c-val{font-size:24px;text-decoration:none;color:var(--ink);user-select:text}
+.c-val:hover{color:var(--accent)}
+.c-email{font-family:var(--f-body);font-size:17px;overflow-wrap:anywhere}
+.c-sub{color:var(--mute);font-size:15px}
+.c-wa .wa-btn{margin-top:10px;justify-self:start}
+@media (max-width:1180px){.contact{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.contact{grid-template-columns:1fr}.c-card{padding:24px 20px}}
+@media (max-width:359px){.btn.wa-btn{white-space:normal}}
+/* WhatsApp green with charcoal text: white on #25D366 is only ~2:1 */
+.btn.wa-btn{background:#25D366;border-color:#25D366;color:var(--ink);white-space:nowrap;letter-spacing:.08em;padding-inline:16px}
+.btn.wa-btn:hover{background:#1FBE5B;border-color:#1FBE5B}
+.wa-ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--wa-mask) center/contain no-repeat;mask:var(--wa-mask) center/contain no-repeat}
+:root{--wa-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M9.1 7.6c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.6 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4l-2.1-1c-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.3z'/%3E%3C/svg%3E")}
+.wa-float{position:fixed;z-index:60;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(30,33,36,.18);transition:transform .25s,opacity .25s,visibility .25s}
+.wa-float .wa-ico{width:30px;height:30px}
+.wa-float:hover{transform:translateY(-2px)}
+.wa-float.away{opacity:0;visibility:hidden;transform:translateY(12px)}
+.wa-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--accent);text-decoration:none;justify-self:start}
+.wa-link .wa-ico{width:16px;height:16px}
+.wa-link:hover{text-decoration:underline}
+
+footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px calc(104px + env(safe-area-inset-bottom,0px))} /* extra bottom room for the floating WhatsApp button */
 .foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:40px;font-size:13px;color:var(--mute)}
 .foot p{margin:0 0 10px}
 @media (max-width:760px){.foot{grid-template-columns:1fr}}
@@ -271,7 +315,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
   <div class="wrap">
     <a href="#top" class="brand" aria-label="Eco EV home"><i></i>ECO&nbsp;EV</a>
     <nav aria-label="Main">
-      <a href="#models">Models</a><a href="#compare">Compare</a><a href="#ownership">Ownership</a>
+      <a href="#models">Models</a><a href="#compare">Compare</a><a href="#ownership">Ownership</a><a href="#contact">Contact</a>
     </nav>
     <a href="#reserve" class="btn">Reserve</a>
   </div>
@@ -444,7 +488,39 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
       </form>
     </div>
   </section>
+
+  <section id="contact" aria-labelledby="cth">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Contact</div><h2 id="cth">Talk to us.</h2></div>
+        <p>Eco EV · Limpopo</p>
+      </div>
+      <div class="contact">
+        <div class="c-card">
+          <h3>Call</h3>
+          <p><a href="tel:+27836249080" class="c-val num">083 624 9080</a></p>
+          <p><a href="tel:+27824873509" class="c-val num">082 487 3509</a></p>
+        </div>
+        <div class="c-card">
+          <h3>Email</h3>
+          <p><a href="mailto:Ulrigh@ecorenergy.co.za" class="c-val c-email">Ulrigh@ecorenergy.co.za</a></p>
+        </div>
+        <div class="c-card">
+          <h3>Hours</h3>
+          <p>Monday to Friday, 08:00–17:00</p>
+          <p class="c-sub">Closed Saturday and Sunday, but you can WhatsApp us any time.</p>
+        </div>
+        <div class="c-card c-wa">
+          <h3>WhatsApp</h3>
+          <p><a href="https://wa.me/27836249080?text=Hi%20Eco%20EV%2C%20I'm%20interested%20in%20a%20Geely%20vehicle." class="c-val num" target="_blank" rel="noopener">083 624 9080</a></p>
+          <a href="https://wa.me/27836249080?text=Hi%20Eco%20EV%2C%20I'm%20interested%20in%20a%20Geely%20vehicle." class="btn wa-btn" target="_blank" rel="noopener"><i class="wa-ico" aria-hidden="true"></i>Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<a href="https://wa.me/27836249080?text=Hi%20Eco%20EV%2C%20I'm%20interested%20in%20a%20Geely%20vehicle." class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Chat with Eco EV on WhatsApp"><i class="wa-ico" aria-hidden="true"></i></a>
 
 <footer>
   <div class="wrap foot">
@@ -523,6 +599,8 @@ const STOCK={
 const stockOf=d=>STOCK[d.stock];
 const stockChip=d=>`<span class="stock s-${d.stock}"><i aria-hidden="true"></i>${stockOf(d).label} · ${stockOf(d).detail}</span>`;
 const CHARGER_FEAT='Free home charger installation (T&amp;Cs apply)';
+const WA=msg=>'https://wa.me/27836249080?text='+encodeURIComponent(msg);
+const WA_ICON='<i class="wa-ico" aria-hidden="true"></i>';
 
 /* ---------- car renders ---------- */
 const SHAPES={
@@ -617,6 +695,7 @@ function renderModel(m){
         <a href="#reserve" class="btn" data-res="${m.id}">${d.stock==='waitlist'?stockOf(d).cta:'Reserve '+d.n}</a>
         <a href="#compare" class="btn ghost" data-cmp="${m.id}">Compare</a>
       </div>
+      <a class="wa-link" href="${WA(`Hi Eco EV, I'm interested in the ${m.name} ${d.n}.`)}" target="_blank" rel="noopener">${WA_ICON}Ask on WhatsApp</a>
     </div>
     <div class="m-visual${imgOf(m,d)?' has-photo is-'+imgOf(m,d).fit:''}">
       <span class="big" aria-hidden="true">${d.n.split(' ')[0]}</span>
@@ -700,7 +779,7 @@ form.addEventListener('submit',e=>{
   const show=ok=>{
     done.hidden=false;
     done.innerHTML=ok
-      ?`<div class="eyebrow">Reservation received</div><div class="ref">${ref}</div><p class="fine">Thank you. The Eco EV team will contact you on the number you gave to confirm your quote. Keep this reference.</p><pre id="sum"></pre>`
+      ?`<div class="eyebrow">Reservation received</div><div class="ref">${ref}</div><p class="fine">Thank you. The Eco EV team will contact you on the number you gave to confirm your quote. Keep this reference.</p><p class="fine">Want a faster reply? <a class="wa-link" href="${WA(`Hi Eco EV, I've just reserved online. My reference is ${ref}.`)}" target="_blank" rel="noopener">${WA_ICON}WhatsApp us</a></p><pre id="sum"></pre>`
       :`<div class="eyebrow">Not sent</div><div class="ref">${ref}</div><p class="fine">Your reservation didn't go through. Check your connection and try again, or copy the details and send them to us.</p><pre id="sum"></pre><div><button type="button" class="btn ghost" id="copy">Copy details</button></div>`;
     document.getElementById('sum').textContent=summary;
     const cp=document.getElementById('copy');
@@ -717,6 +796,11 @@ document.addEventListener('click',e=>{const r=e.target.closest('[data-res]');if(
 /* "Ask about the charger offer" adds a line to the notes without wiping what's there */
 document.addEventListener('click',e=>{const a=e.target.closest('[data-note]');if(!a)return;const n=document.getElementById('fNote'),t=a.dataset.note;
   if(!n.value.includes(t))n.value=n.value.trim()?n.value.trim()+'\n'+t:t});
+
+/* ---------- floating WhatsApp: step aside while the reservation form (fields, submit) or the contact WhatsApp card is on screen ---------- */
+const waFloat=document.getElementById('waFloat'),waSeen=new Set();
+const waIO=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?waSeen.add(e.target):waSeen.delete(e.target));waFloat.classList.toggle('away',waSeen.size>0)},{rootMargin:'0px 0px 40px 0px'});
+[form,document.querySelector('.c-wa')].forEach(el=>waIO.observe(el));
 
 /* ---------- nav ---------- */
 const nav=document.getElementById('nav');
