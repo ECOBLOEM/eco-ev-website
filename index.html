@@ -111,7 +111,6 @@ section{padding-block:clamp(70px,10vw,130px)}
 .models{display:grid;gap:22px}
 .model{--k:var(--ice);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:radial-gradient(120% 90% at 75% 70%,color-mix(in srgb,var(--k) 9%,transparent),transparent 60%),var(--stage);border:1px solid var(--line);position:relative;overflow:hidden}
 .model[data-kind="phev"]{--k:var(--volt)}
-.model[data-kind="petrol"]{--k:var(--amber)}
 .model:nth-child(even){grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
 .model:nth-child(even) .m-info{order:2}
 .m-info{padding:clamp(24px,3.4vw,48px);display:grid;gap:22px;align-content:start;min-width:0}
@@ -127,6 +126,11 @@ section{padding-block:clamp(70px,10vw,130px)}
 .price{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .price .amt{font-family:var(--f-num);font-size:clamp(38px,4.2vw,54px);font-weight:500;line-height:1}
 .price .note{font-size:13px;color:var(--mute)}
+.stock{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;border:1px solid var(--s);font-size:12px;letter-spacing:.04em;color:var(--ink);background:color-mix(in srgb,var(--s) 10%,transparent)}
+.stock i,.deriv .dot{width:7px;height:7px;border-radius:50%;background:var(--s);flex:none}
+.s-import{--s:#5fd39a}
+.s-waitlist{--s:var(--amber)}
+.deriv{display:inline-flex;align-items:center;gap:8px}
 .specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .spec{background:var(--stage);padding:14px 16px;min-width:0}
 .spec dt{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
@@ -147,11 +151,14 @@ section{padding-block:clamp(70px,10vw,130px)}
 .m-visual.has-photo .photo{display:block}
 .m-visual.has-photo .swap{display:none}
 .m-visual.is-scene .big{display:none}
-.photo.cut{width:100%;max-width:640px;height:auto;margin-inline:auto;filter:drop-shadow(0 28px 26px rgba(0,0,0,.75)) drop-shadow(0 0 46px color-mix(in srgb,var(--k) 22%,transparent))}
+/* cutouts: car only, with a CSS ground shadow under the tyres (--gl/--gr = tyre extents from each edge) */
+.photo.cut{width:100%;max-width:640px;margin-inline:auto;isolation:isolate}
+.photo.cut img{display:block;width:100%;height:auto}
+.photo.cut::before{content:"";position:absolute;z-index:-1;left:var(--gl,8%);right:var(--gr,8%);bottom:0;height:9%;transform:translateY(50%);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.9),rgba(0,0,0,.55) 45%,transparent);filter:blur(5px)}
 .photo.cut.small{max-width:420px}
 .photo.scene{width:100%;height:auto;border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.55)}
 .hero-car.is-scene{display:grid;place-items:center}
-.hero-car .photo.scene{max-width:920px;border:0;box-shadow:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent),linear-gradient(transparent,#000 9%,#000 72%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent),linear-gradient(transparent,#000 9%,#000 72%,transparent);mask-composite:intersect}
+.hero-car .photo.scene{max-width:1120px;border:0;box-shadow:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent),linear-gradient(transparent,#000 9%,#000 72%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent),linear-gradient(transparent,#000 9%,#000 72%,transparent);mask-composite:intersect}
 .hero-car .hero-tag{z-index:2;text-shadow:0 1px 10px #000}
 .hero-note{margin-top:12px;font-size:12px}
 .swap{width:100%;display:grid;place-items:center;animation:swapIn .6s cubic-bezier(.2,.8,.2,1)}
@@ -176,6 +183,8 @@ tbody th{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(
 tbody td{font-family:var(--f-num);font-size:19px}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td.best{color:var(--ice)}
+td .lab{display:block;margin-top:4px;font-family:var(--f-body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+td .stock{font-family:var(--f-body)}
 @media (max-width:700px){.compare-pick{grid-template-columns:1fr}}
 
 /* LIFESTYLE */
@@ -225,6 +234,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
 .foot p{margin:0 0 10px}
 @media (max-width:760px){.foot{grid-template-columns:1fr}}
 
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 
@@ -252,8 +262,9 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
         <div class="hero-side">
           <p>Riddara is the electric bakkie brand of the Geely group. The RD6 Apex puts 315&nbsp;kW and 595&nbsp;Nm through two motors and all four wheels, making it one of the most powerful bakkies on sale in South Africa. It tows up to 3&nbsp;000&nbsp;kg and never needs diesel.</p>
           <div class="price"><span class="amt num">R 781 900</span><span class="note">Straight purchase</span></div>
+          <div id="heroStock"></div>
           <div class="ctas">
-            <a href="#reserve" class="btn" data-res="rd6" data-di="2">Reserve the Apex</a>
+            <a href="#reserve" class="btn" data-res="rd6" data-di="2">Join the waiting list</a>
             <a href="#models" class="btn ghost">Explore the range</a>
           </div>
         </div>
@@ -281,7 +292,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
       <div class="geely-facts">
         <div><b>The group</b><p>Geely is the Chinese automotive group behind Volvo Cars, Polestar, Lotus and Zeekr.</p></div>
         <div><b>Proven sellers</b><p>The E2 was China's best-selling vehicle of 2025.</p></div>
-        <div><b>In South Africa</b><p>Geely returned to South Africa in November 2025 and now offers electric, plug-in hybrid, petrol and bakkie models.</p></div>
+        <div><b>In South Africa</b><p>Geely returned to South Africa in November 2025 and now offers electric and plug-in hybrid cars and an electric bakkie.</p></div>
       </div>
     </div>
   </section>
@@ -294,7 +305,6 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
           <button class="chip" data-f="all" aria-pressed="true">All</button>
           <button class="chip" data-f="ev" aria-pressed="false">Electric</button>
           <button class="chip" data-f="phev" aria-pressed="false">Plug-in hybrid</button>
-          <button class="chip" data-f="petrol" aria-pressed="false">Petrol</button>
           <button class="chip" data-f="bakkie" aria-pressed="false">Bakkie</button>
         </div>
       </div>
@@ -346,12 +356,12 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
         <p class="fine" style="font-size:16px">No payment today. Reserve your car, get a firm quote, then order and pay by EFT. We deliver.</p>
         <ol class="steps">
           <li><span><b>Reserve online</b>Choose the model and derivative.</span></li>
-          <li><span><b>Firm quote</b>We confirm price, colour and delivery lead time.</span></li>
-          <li><span><b>Order and pay</b>Pay by EFT to place your order. We deliver your car within the agreed lead time.</span></li>
+          <li><span><b>Firm quote</b>We confirm price, colour and availability.</span></li>
+          <li><span><b>Order and pay</b>Order and pay by EFT, then we deliver. Current stock is in import, with an ETA of about two weeks after you order and pay by EFT. We confirm your delivery date once the car lands. The Riddara RD6 Apex 4WD is out of stock, so it goes on the waiting list for the next batch.</span></li>
         </ol>
       </div>
       <form id="resForm" name="reservation" method="POST" data-netlify="true" netlify-honeypot="company" novalidate>
-        <input type="hidden" name="form-name" value="reservation"><input type="hidden" name="ref" id="fRef"><input type="hidden" name="price" id="fPrice">
+        <input type="hidden" name="form-name" value="reservation"><input type="hidden" name="ref" id="fRef"><input type="hidden" name="price" id="fPrice"><input type="hidden" name="availability" id="fStock">
         <p hidden><label>Leave empty<input name="company" tabindex="-1" autocomplete="off"></label></p>
         <label for="fName">Full name<input id="fName" name="name" autocomplete="name" required></label>
         <label for="fPhone">Mobile number<input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
@@ -385,7 +395,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
     </div>
     <div>
       <p>Geely vehicles are supplied to Eco EV through Geely Auto South Africa's fleet programme. Eco EV is not a franchised Geely dealership.</p>
-      <p>Prices are recommended retail prices announced by Geely Auto South Africa at each model's launch, including VAT, and may change. Specifications are from Geely Auto South Africa specification sheets and brochures and may change without notice. Range is WLTP unless marked NEDC. Geely includes a home wallbox charger on some models subject to its terms and Geely Finance approval; we confirm what is included with a straight purchase on your quote. Vehicle photographs are supplied by Geely and may show overseas specification; the Coolray is shown as an illustration.</p>
+      <p>Prices are recommended retail prices announced by Geely Auto South Africa at each model's launch, including VAT, and may change. Specifications are from Geely Auto South Africa specification sheets and brochures and may change without notice. Range is WLTP unless marked NEDC. Geely includes a home wallbox charger on some models subject to its terms and Geely Finance approval; we confirm what is included with a straight purchase on your quote. Vehicle photographs are supplied by Geely and may show overseas specification.</p>
       <p>Geely, Riddara and model names are trademarks of their respective owners.</p>
     </div>
   </div>
@@ -401,65 +411,57 @@ const MODELS = [
   blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, 325 km of range, a 70-litre front trunk and 375 litres of boot space.",
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',price:339900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
+   {n:'Aspire',stock:'import',price:339900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
     img:{src:'e2-aspire-street.webp',fit:'scene'},
     feat:['15" steel wheels, all-LED lights','14.6" touchscreen with Apple CarPlay and Android Auto','Blind spot detection and rear cross traffic alert','Rear camera and rear parking sensors','Vehicle-to-load power supply']},
-   {n:'Apex',price:389900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
-    img:{src:'e2-apex-green.webp',fit:'cut',small:true},
+   {n:'Apex',stock:'import',price:389900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
+    img:{src:'e2-apex-green.webp',fit:'cut',ground:[6,5]},
     feat:['16" alloys, two-tone paint, privacy glass','Adaptive cruise and automatic emergency braking','360° camera with transparent chassis view','6-way power seat, wireless charging, 6 speakers','256-colour ambient lighting']}
   ]},
- {id:'coolray',name:'Coolray',kind:'petrol',groups:['petrol'],body:'crossover',badge:'Turbo petrol',tag:'Compact performance SUV',
-  blurb:'For buyers not ready to plug in. A 1.5-litre turbo with 128 kW, a seven-speed dual-clutch gearbox and a claimed 6.5 l/100 km.',
-  labels:{range:'Economy',power:'Power',accel:'0–100 km/h',energy:'Engine',extra:'Gearbox',cover:'Warranty'},
-  derivs:[
-   {n:'Nova',price:369900,econ:6.5,range:'6.5 l/100 km',power:'128 kW / 290 Nm',accel:'7.6 s',energy:'1.5 T-GDI',extra:'7-speed DCT',cover:'5 yr / 150 000 km',
-    feat:['Turbocharged 1.5-litre engine','Seven-speed dual-clutch automatic','5 yr / 50 000 km service plan','Five colours']},
-   {n:'Vanguard',price:399900,econ:6.5,range:'6.5 l/100 km',power:'128 kW / 290 Nm',accel:'7.6 s',energy:'1.5 T-GDI',extra:'7-speed DCT',cover:'5 yr / 150 000 km',
-    feat:['Turbocharged 1.5-litre engine','Seven-speed dual-clutch automatic','5 yr / 50 000 km service plan','Mid-range specification']},
-   {n:'Vertex',price:429900,econ:6.5,range:'6.5 l/100 km',power:'128 kW / 290 Nm',accel:'7.6 s',energy:'1.5 T-GDI',extra:'7-speed DCT',cover:'5 yr / 150 000 km',
-    feat:['Motorsport rear wing with side fins','"S" badging','Turbocharged 1.5-litre engine','5 yr / 50 000 km service plan']}
-  ]},
  {id:'e5emi',name:'E5 EM-i',kind:'phev',groups:['phev'],body:'suv',badge:'Plug-in hybrid',tag:'Midsize plug-in hybrid SUV',
-  blurb:'Electric for the daily run, petrol for the long road. Up to 83 km on battery alone and a claimed 943 km on one tank and charge.',
+  blurb:'Electric for the daily run, petrol for the long road. Up to 105 km on battery alone and a claimed 943 km on one tank and charge.',
   labels:{range:'Total range (WLTP)',power:'Electric motor',accel:'0–100 km/h',energy:'Battery',extra:'Electric range',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',price:599999,rangeKm:943,evKm:83,range:'943 km',power:'160 kW / 262 Nm',accel:'8.0 s',energy:'18.4 kWh',extra:'83 km',cover:'6 yr / 150 000 km',
-    img:{src:'e5emi-aspire-silver.webp',fit:'cut'},
+   {n:'Aspire',stock:'import',price:599999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.0 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',
+    img:{src:'e5emi-aspire-silver.webp',fit:'cut',ground:[12,13]},
     feat:['18" alloy wheels and 6 airbags','7 kW wallbox charger','Claimed 6.2 l/100 km (WLTP)','5 yr / 75 000 km service plan']},
-   {n:'Apex',price:679999,rangeKm:943,evKm:83,range:'943 km',power:'160 kW / 262 Nm',accel:'8.1 s',energy:'18.4 kWh',extra:'83 km',cover:'6 yr / 150 000 km',
-    img:{src:'e5emi-apex-green.webp',fit:'cut'},
+   {n:'Apex',stock:'import',price:679999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.1 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',
+    img:{src:'e5emi-apex-green.webp',fit:'cut',ground:[12,13]},
     feat:['19" low-drag alloy wheels','256-colour ambient lighting','Split-folding rear seat','Ivory White interior option']}
   ]},
  {id:'e5',name:'E5',kind:'ev',groups:['ev'],body:'suv',badge:'Electric',tag:'Midsize electric SUV',
   blurb:'The flagship electric SUV. 160 kW, a short-blade LFP battery, heat pump and 100 kW DC charging, with up to 450 km of range.',
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',price:699999,rangeKm:430,range:'430 km',power:'160 kW / 320 Nm',accel:'6.9 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
-    img:{src:'e5-aspire-side.webp',fit:'cut'},
+   {n:'Aspire',stock:'import',price:699999,rangeKm:430,range:'430 km',power:'160 kW / 320 Nm',accel:'6.9 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+    img:{src:'e5-aspire-side.webp',fit:'cut',ground:[13,12]},
     feat:['18" alloy wheels','15.4" screen, 10.2" digital cluster','Heat pump and ventilated front seats','6 yr / 120 000 km service plan']},
-   {n:'Apex',price:759999,rangeKm:410,range:'410 km',power:'160 kW / 320 Nm',accel:'7.1 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
-    img:{src:'e5-apex-front.webp',fit:'cut'},
-    feat:['19" low-drag alloy wheels','Head-up display and panoramic sunroof','Front seat massage and memory','Adaptive cruise and lane change assist']},
-   {n:'Apex Plus',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
-    img:{src:'e5-apex-front.webp',fit:'cut'},
+   {n:'Apex Plus',stock:'import',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+    img:{src:'e5-apex-front.webp',fit:'cut',ground:[7,6]},
     feat:['Larger 68.39 kWh battery, 450 km range','Head-up display and panoramic sunroof','1 000 W, 16-speaker Flyme audio','19" alloys, powered tailgate']}
   ]},
  {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
   blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload, up to 3 000 kg towing and a 70-litre front trunk.',
   labels:{range:'Range (NEDC)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
   derivs:[
-   {n:'Aspire 2WD',price:611900,rangeKm:null,range:'369 km',power:'180 kW / 309 Nm',accel:'9.0 s',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'6 yr / 150 000 km',
+   {n:'Aspire Econ 2WD',stock:'import',price:611900,rangeKm:null,range:'369 km',power:'180 kW / 309 Nm',accel:'9.0 s',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'6 yr / 150 000 km',
     img:{src:'rd6-aspire-2wd-white.webp',fit:'scene'},
     feat:['Rear-wheel drive, 3 drive modes','17" alloys with all-terrain tyres','90 kW DC charging, 30–80% in 32 min','6.6 kW power outlet in the load bin']},
-   {n:'Aspire 4WD',price:681900,rangeKm:null,range:'390 km',power:'280 kW / 485 Nm',accel:'7.0 s',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'6 yr / 150 000 km',
+   {n:'Aspire Econ 4WD',stock:'import',price:681900,rangeKm:null,range:'390 km',power:'280 kW / 485 Nm',accel:'7.0 s',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'6 yr / 150 000 km',
     img:{src:'rd6-aspire-4wd-black.webp',fit:'scene'},
     feat:['Dual-motor four-wheel drive','Sand, Mud and Off-road modes','95% maximum climbing gradient','4 airbags, 360° camera']},
-   {n:'Apex 4WD',price:781900,rangeKm:null,range:'424 km',power:'315 kW / 595 Nm',accel:'4.5 s*',energy:'73 kWh LFP',extra:'1 030 kg / 3 000 kg',cover:'6 yr / 150 000 km',
+   {n:'Apex 4WD',stock:'waitlist',price:781900,rangeKm:null,range:'424 km',power:'315 kW / 595 Nm',accel:'4.5 s*',energy:'73 kWh LFP',extra:'1 030 kg / 3 000 kg',cover:'6 yr / 150 000 km',
     img:{src:'rd6-apex-4wd-green.webp',fit:'scene'},
     feat:['14.6" screen, 10.2" cluster, 8 speakers','L2+ driver assistance with 14 functions','815 mm wading and Wading mode','LED headlights, 18" alloys, 6 airbags']}
   ]}
 ];
-const COLORS={ev:'#7fe3ff',phev:'#a98cff',petrol:'#ffb45c'};
+const COLORS={ev:'#7fe3ff',phev:'#a98cff'};
+const STOCK={
+ import:{label:'In import',detail:'ETA about 2 weeks',short:'in import',cta:'Reserve'},
+ waitlist:{label:'Out of stock',detail:'next batch date to be confirmed',short:'waiting list',cta:'Join the waiting list'}
+};
+const stockOf=d=>STOCK[d.stock];
+const stockChip=d=>`<span class="stock s-${d.stock}"><i aria-hidden="true"></i>${stockOf(d).label} · ${stockOf(d).detail}</span>`;
 
 /* ---------- car renders ---------- */
 const SHAPES={
@@ -516,9 +518,13 @@ const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function variant(m,i){const n=m.derivs[i].n;return {spokes:[5,6,10][i]||5,drive:/4wd/i.test(n)?'4wd':/2wd/i.test(n)?'rwd':''}}
 function imgOf(m,d){return d.img||m.img||null}
 function photo(m,d){const im=imgOf(m,d);if(!im)return '';
-  return `<img class="photo ${im.fit}${im.small?' small':''}" alt="Geely ${m.name} ${d.n}" src="images/${im.src}" loading="lazy" onerror="this.parentNode.classList.remove('has-photo','is-${im.fit}');this.remove()">`}
+  const img=cls=>`<img${cls} alt="Geely ${m.name} ${d.n}" src="images/${im.src}" loading="lazy" onerror="this.closest('.m-visual').classList.remove('has-photo','is-${im.fit}');this.closest('.photo').remove()">`;
+  if(im.fit!=='cut')return img(` class="photo ${im.fit}"`);
+  const g=im.ground||[8,8];
+  return `<div class="photo cut${im.small?' small':''}" style="--gl:${g[0]}%;--gr:${g[1]}%">${img('')}</div>`}
 window.__photo=photo;
 /* hero car */
+const HERO=MODELS.find(m=>m.id==='rd6').derivs[2];document.getElementById('heroStock').innerHTML=stockChip(HERO);
 const heroCar=document.getElementById('heroCar');heroCar.classList.add('has-photo','is-scene');
 heroCar.insertAdjacentHTML('beforeend',`<div class="swap">${carSVG('bakkie','#7fe3ff',{label:'Light-traced render of the Riddara RD6 Apex 4WD',spokes:10,drive:'4wd'})}</div><img class="photo scene" alt="Geely Riddara RD6 Apex 4WD in blue" src="images/rd6-hero-blue.webp" fetchpriority="high" onerror="this.parentNode.classList.remove('has-photo','is-scene');this.remove()">`);
 
@@ -540,13 +546,14 @@ function renderModel(m){
       </div>
       <p class="m-blurb">${m.blurb}</p>
       <div class="derivs" role="group" aria-label="${m.name} derivatives">
-        ${m.derivs.map((x,i)=>`<button class="deriv" data-m="${m.id}" data-i="${i}" aria-pressed="${i===state[m.id]}">${x.n}</button>`).join('')}
+        ${m.derivs.map((x,i)=>`<button class="deriv" data-m="${m.id}" data-i="${i}" aria-pressed="${i===state[m.id]}"><i class="dot s-${x.stock}" aria-hidden="true"></i>${x.n}<span class="vh">, ${stockOf(x).label.toLowerCase()}</span></button>`).join('')}
       </div>
       <div class="price"><span class="amt num">${R(d.price)}</span><span class="note">${m.name} ${d.n} · straight purchase</span></div>
+      <div>${stockChip(d)}</div>
       <dl class="specs" style="margin:0">${specHTML(m,d)}</dl>
       <ul class="feats">${d.feat.map(f=>`<li>${f}</li>`).join('')}</ul>
       <div class="m-actions">
-        <a href="#reserve" class="btn" data-res="${m.id}">Reserve ${d.n}</a>
+        <a href="#reserve" class="btn" data-res="${m.id}">${d.stock==='waitlist'?stockOf(d).cta:'Reserve '+d.n}</a>
         <a href="#compare" class="btn ghost" data-cmp="${m.id}">Compare</a>
       </div>
     </div>
@@ -579,7 +586,7 @@ function applyFilter(){list.querySelectorAll('.model').forEach(el=>{el.hidden=!(
 
 /* ---------- compare ---------- */
 const ALL=[];MODELS.forEach(m=>m.derivs.forEach((d,i)=>ALL.push({key:m.id+':'+i,m,d,label:m.name+' '+d.n})));
-const defaults=['rd6:2','e5:2','e2:1'];
+const defaults=['rd6:2','e5:1','e2:1'];
 const pick=document.getElementById('cmpPick');
 pick.innerHTML=[0,1,2].map(i=>`<label for="cmp${i}">Vehicle ${i+1}<select id="cmp${i}">${ALL.map(a=>`<option value="${a.key}">${a.label}</option>`).join('')}</select></label>`).join('');
 [0,1,2].forEach(i=>{const s=document.getElementById('cmp'+i);s.value=defaults[i];s.addEventListener('change',drawCompare)});
@@ -588,11 +595,12 @@ function drawCompare(){
   const rows=[
     ['Price',a=>R(a.d.price),a=>-a.d.price],
     ['Powertrain',a=>a.m.badge,null],
-    ['Range',a=>a.m.kind==='petrol'?'Petrol · '+a.d.range:a.d.range+(/NEDC/.test(a.m.labels.range)?' (NEDC)':' (WLTP)'),a=>a.d.rangeKm||0],
+    ['Range',a=>a.d.range+(/NEDC/.test(a.m.labels.range)?' (NEDC)':' (WLTP)'),a=>a.d.rangeKm||0],
     ['Power',a=>a.d.power,a=>parseFloat(a.d.power)||0],
     ['0–100 km/h',a=>/s$/.test(a.d.accel)?a.d.accel:'—',a=>/s$/.test(a.d.accel)?-parseFloat(a.d.accel):-99],
-    ['Battery / engine',a=>a.d.energy,null],
-    [ 'Charging / gearbox',a=>a.d.extra,null],
+    ['Battery',a=>a.d.energy,null],
+    ['More',a=>`${a.d.extra}<small class="lab">${a.m.labels.extra}</small>`,null],
+    ['Availability',a=>stockChip(a.d),null],
     ['Warranty / plan',a=>a.d.cover,null]
   ];
   const t=document.getElementById('cmpTable');
@@ -605,11 +613,15 @@ function drawCompare(){
 drawCompare();
 
 /* ---------- reservation ---------- */
-const fModel=document.getElementById('fModel'),fDeriv=document.getElementById('fDeriv');
+const fModel=document.getElementById('fModel'),fDeriv=document.getElementById('fDeriv'),form=document.getElementById('resForm');
 fModel.innerHTML=MODELS.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
-function fillDerivs(){const m=MODELS.find(x=>x.id===fModel.value);fDeriv.innerHTML=m.derivs.map((d,i)=>`<option value="${i}">${d.n} · ${R(d.price)}</option>`).join('')}
-fModel.addEventListener('change',fillDerivs);fModel.value='rd6';fillDerivs();fDeriv.value='2';
-const form=document.getElementById('resForm'),done=document.getElementById('done'),err=document.getElementById('fErr');
+function fillDerivs(){const m=MODELS.find(x=>x.id===fModel.value);fDeriv.innerHTML=m.derivs.map((d,i)=>`<option value="${i}">${d.n} · ${R(d.price)} · ${stockOf(d).short}</option>`).join('');syncSubmit()}
+function selDeriv(){return MODELS.find(x=>x.id===fModel.value).derivs[+fDeriv.value]}
+function syncSubmit(){const b=form.querySelector('button[type=submit]');if(!b.disabled)b.textContent=submitLabel()}
+function submitLabel(){const d=selDeriv();return d&&d.stock==='waitlist'?'Join the waiting list':'Reserve this car'}
+fDeriv.addEventListener('change',syncSubmit);
+fModel.addEventListener('change',fillDerivs);fModel.value='rd6';fillDerivs();fDeriv.value='2';syncSubmit();
+const done=document.getElementById('done'),err=document.getElementById('fErr');
 form.addEventListener('submit',e=>{
   e.preventDefault();
   const name=document.getElementById('fName').value.trim(),phone=document.getElementById('fPhone').value.trim();
@@ -619,8 +631,8 @@ form.addEventListener('submit',e=>{
   const m=MODELS.find(x=>x.id===fModel.value),d=m.derivs[+fDeriv.value];
   const ref='ECO-'+Math.random().toString(36).slice(2,7).toUpperCase();
   const pay=form.querySelector('input[name=pay]:checked').value;
-  const summary=`Reservation ${ref}\n${m.name} ${d.n} · ${R(d.price)}\nPayment: ${pay}\nName: ${name}\nMobile: ${phone}\nEmail: ${document.getElementById('fEmail').value.trim()||'—'}\nNotes: ${document.getElementById('fNote').value.trim()||'—'}`;
-  document.getElementById('fRef').value=ref;document.getElementById('fPrice').value=R(d.price);
+  const summary=`Reservation ${ref}\n${m.name} ${d.n} · ${R(d.price)}\nAvailability: ${stockOf(d).label}, ${stockOf(d).detail}\nPayment: ${pay}\nName: ${name}\nMobile: ${phone}\nEmail: ${document.getElementById('fEmail').value.trim()||'—'}\nNotes: ${document.getElementById('fNote').value.trim()||'—'}`;
+  document.getElementById('fRef').value=ref;document.getElementById('fPrice').value=R(d.price);document.getElementById('fStock').value=stockOf(d).label+' · '+stockOf(d).detail;
   const body=new URLSearchParams(new FormData(form));body.set('model',m.name);body.set('derivative',d.n);
   const btn=form.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Sending…';
   const show=ok=>{
@@ -636,10 +648,10 @@ form.addEventListener('submit',e=>{
   };
   fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()})
     .then(r=>show(r.ok)).catch(()=>show(false))
-    .finally(()=>{btn.disabled=false;btn.textContent='Reserve this car'});
+    .finally(()=>{btn.disabled=false;btn.textContent=submitLabel()});
 });
 
-document.addEventListener('click',e=>{const r=e.target.closest('[data-res]');if(!r)return;fModel.value=r.dataset.res;fillDerivs();fDeriv.value=r.dataset.di??state[r.dataset.res]});
+document.addEventListener('click',e=>{const r=e.target.closest('[data-res]');if(!r)return;fModel.value=r.dataset.res;fillDerivs();fDeriv.value=r.dataset.di??state[r.dataset.res];syncSubmit()});
 
 /* ---------- nav ---------- */
 const nav=document.getElementById('nav');
