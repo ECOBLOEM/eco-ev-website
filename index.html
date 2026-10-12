@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Eco EV, Modimolle. The Geely Riddara RD6 electric bakkie and the Geely range, for straight purchase.">
+<meta name="description" content="Eco EV, Limpopo. The Geely Riddara RD6 electric bakkie and the Geely range, for straight purchase.">
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
-<title>Eco EV Modimolle</title>
+<title>Eco EV | Limpopo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600&display=swap">
@@ -197,6 +197,31 @@ td .stock{font-family:var(--f-body)}
 .life-copy p{margin:0;max-width:40ch;color:var(--ink)}
 @media (max-width:700px){.life::after{background:linear-gradient(0deg,rgba(247,244,239,.97) 0%,rgba(247,244,239,.92) 58%,rgba(247,244,239,.5) 80%,rgba(247,244,239,0) 100%)}}
 
+/* HOME CHARGER OFFER */
+.charger{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:center}
+.charger-copy{display:grid;gap:22px;justify-items:start}
+.charger-copy h2{font-size:clamp(24px,3.2vw,42px);max-width:18ch}
+.charger-copy>p{margin:0;color:var(--mute);max-width:48ch}
+.charger-points{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.charger-points li{display:flex;gap:12px;align-items:center}
+.charger-points li::before{content:"";flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent-tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.6' fill='none' stroke='%231F6B73' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.charger-fine{margin:0;font-size:12px;color:var(--mute)}
+.charger-art{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:clamp(16px,3vw,32px)}
+.charger-art svg{display:block;width:100%;height:auto;max-width:420px;margin-inline:auto}
+.ca-wall{fill:var(--bg)}
+.ca-floor{stroke:var(--line);stroke-width:2}
+.ca-shadow{fill:rgba(30,33,36,.06)}
+.ca-body{fill:var(--card);stroke:var(--ink);stroke-width:2.5}
+.ca-face{fill:var(--accent-tint)}
+.ca-bolt{fill:var(--accent)}
+.ca-ring{fill:none;stroke:var(--accent);stroke-width:2.5}
+.ca-led{fill:var(--accent)}
+.ca-port{fill:var(--ink)}
+.ca-cable{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.ca-plug{fill:var(--ink)}
+.ca-plug-tip{fill:var(--accent)}
+@media (max-width:900px){.charger{grid-template-columns:1fr}.charger-art{order:-1}}
+
 /* OWNERSHIP */
 .own{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .own div{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:32px 28px;display:grid;gap:10px;align-content:start}
@@ -257,7 +282,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
     <div class="wrap">
       <div class="hero-copy">
         <div>
-          <div class="eyebrow">Geely · Riddara · Eco EV Modimolle</div>
+          <div class="eyebrow">Geely · Riddara · Eco EV Limpopo</div>
           <h1 id="h1">Riddara RD6<br><em>Apex 4WD.</em></h1>
         </div>
         <div class="hero-side">
@@ -335,6 +360,39 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
     </div>
   </section>
 
+  <section id="charger" class="alt" aria-labelledby="chh">
+    <div class="wrap charger">
+      <div class="charger-copy">
+        <div class="eyebrow">Eco EV offer</div>
+        <h2 id="chh">Your home charger, installed free.</h2>
+        <p>Buy any electric or plug-in hybrid vehicle from Eco EV and we install a residential wallbox charger at your home free of charge. Terms and conditions apply.</p>
+        <ul class="charger-points">
+          <li>Wall-mounted home charger</li>
+          <li>Installed by our team at no cost</li>
+          <li>Charge overnight, wake up full</li>
+        </ul>
+        <div><a href="#reserve" class="btn ghost" data-note="Home charger installation">Ask about the charger offer</a></div>
+        <p class="charger-fine">T&amp;Cs apply. Installation subject to a site assessment.</p>
+      </div>
+      <div class="charger-art">
+        <svg viewBox="0 0 360 320" role="img" aria-label="Illustration of a wall-mounted home charger with its cable">
+          <rect class="ca-wall" x="20" y="16" width="320" height="288" rx="18"/>
+          <line class="ca-floor" x1="20" y1="268" x2="340" y2="268"/>
+          <rect class="ca-shadow" x="118" y="58" width="104" height="140" rx="20"/>
+          <rect class="ca-body" x="112" y="48" width="104" height="140" rx="20"/>
+          <rect class="ca-face" x="128" y="66" width="72" height="44" rx="8"/>
+          <path class="ca-bolt" d="M166 74 L154 90 H164 L160 103 L174 85 H164 Z"/>
+          <circle class="ca-ring" cx="164" cy="140" r="15"/>
+          <circle class="ca-led" cx="164" cy="140" r="5"/>
+          <rect class="ca-port" x="152" y="176" width="24" height="18" rx="5"/>
+          <path class="ca-cable" d="M164 194 C164 236 120 238 112 216 C104 194 146 186 168 210 C190 234 208 262 252 262"/>
+          <rect class="ca-plug" x="246" y="248" width="34" height="26" rx="7"/>
+          <rect class="ca-plug-tip" x="280" y="254" width="10" height="14" rx="3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
   <section id="ownership" aria-labelledby="oh">
     <div class="wrap">
       <div class="sec-head">
@@ -392,12 +450,12 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
   <div class="wrap foot">
     <div>
       <a href="#top" class="brand" style="margin-bottom:16px"><i></i>ECO&nbsp;EV</a>
-      <p>Modimolle, Limpopo</p>
+      <p>Limpopo</p>
       <p>An Eco Energy company</p>
     </div>
     <div>
       <p>Geely vehicles are supplied to Eco EV through Geely Auto South Africa's fleet programme. Eco EV is not a franchised Geely dealership.</p>
-      <p>Prices are recommended retail prices announced by Geely Auto South Africa at each model's launch, including VAT, and may change. Specifications are from Geely Auto South Africa specification sheets and brochures and may change without notice. Range is WLTP unless marked NEDC. Geely includes a home wallbox charger on some models subject to its terms and Geely Finance approval; we confirm what is included with a straight purchase on your quote. Vehicle photographs are supplied by Geely and may show overseas specification.</p>
+      <p>Prices are recommended retail prices announced by Geely Auto South Africa at each model's launch, including VAT, and may change. Specifications are from Geely Auto South Africa specification sheets and brochures and may change without notice. Range is WLTP unless marked NEDC. Free home charger installation is an Eco EV offer. Terms and conditions apply. Vehicle photographs are supplied by Geely and may show overseas specification.</p>
       <p>Geely, Riddara and model names are trademarks of their respective owners.</p>
     </div>
   </div>
@@ -426,7 +484,7 @@ const MODELS = [
   derivs:[
    {n:'Aspire',stock:'import',price:599999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.0 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',
     img:{src:'e5emi-aspire-silver.webp',fit:'cut',ground:[12,13]},
-    feat:['18" alloy wheels and 6 airbags','7 kW wallbox charger','Claimed 6.2 l/100 km (WLTP)','5 yr / 75 000 km service plan']},
+    feat:['18" alloy wheels and 6 airbags','7 kW home charging capability','Claimed 6.2 l/100 km (WLTP)','5 yr / 75 000 km service plan']},
    {n:'Apex',stock:'import',price:679999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.1 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',
     img:{src:'e5emi-apex-green.webp',fit:'cut',ground:[12,13]},
     feat:['19" low-drag alloy wheels','256-colour ambient lighting','Split-folding rear seat','Ivory White interior option']}
@@ -464,6 +522,7 @@ const STOCK={
 };
 const stockOf=d=>STOCK[d.stock];
 const stockChip=d=>`<span class="stock s-${d.stock}"><i aria-hidden="true"></i>${stockOf(d).label} · ${stockOf(d).detail}</span>`;
+const CHARGER_FEAT='Free home charger installation (T&amp;Cs apply)';
 
 /* ---------- car renders ---------- */
 const SHAPES={
@@ -553,7 +612,7 @@ function renderModel(m){
       <div class="price"><span class="amt num">${R(d.price)}</span><span class="note">${m.name} ${d.n} · straight purchase</span></div>
       <div>${stockChip(d)}</div>
       <dl class="specs" style="margin:0">${specHTML(m,d)}</dl>
-      <ul class="feats">${d.feat.map(f=>`<li>${f}</li>`).join('')}</ul>
+      <ul class="feats">${[...d.feat,CHARGER_FEAT].map(f=>`<li>${f}</li>`).join('')}</ul>
       <div class="m-actions">
         <a href="#reserve" class="btn" data-res="${m.id}">${d.stock==='waitlist'?stockOf(d).cta:'Reserve '+d.n}</a>
         <a href="#compare" class="btn ghost" data-cmp="${m.id}">Compare</a>
@@ -655,6 +714,9 @@ form.addEventListener('submit',e=>{
 });
 
 document.addEventListener('click',e=>{const r=e.target.closest('[data-res]');if(!r)return;fModel.value=r.dataset.res;fillDerivs();fDeriv.value=r.dataset.di??state[r.dataset.res];syncSubmit()});
+/* "Ask about the charger offer" adds a line to the notes without wiping what's there */
+document.addEventListener('click',e=>{const a=e.target.closest('[data-note]');if(!a)return;const n=document.getElementById('fNote'),t=a.dataset.note;
+  if(!n.value.includes(t))n.value=n.value.trim()?n.value.trim()+'\n'+t:t});
 
 /* ---------- nav ---------- */
 const nav=document.getElementById('nav');
