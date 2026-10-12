@@ -271,8 +271,28 @@ legend{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--
 .done{grid-column:1/-1;display:grid;gap:14px;border:1px solid var(--accent);border-radius:var(--r);padding:22px;background:var(--accent-tint)}
 .done .ref{font-family:var(--f-num);font-size:30px;color:var(--accent)}
 .done pre{white-space:pre-wrap;margin:0;font-family:var(--f-body);font-size:14px;color:var(--mute);background:var(--card);padding:14px;border:1px solid var(--line);border-radius:var(--r);user-select:all}
+form label.check{display:flex;gap:12px;align-items:start;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink);cursor:pointer}
+.check input{width:18px;height:18px;margin:3px 0 0;padding:0;flex:none;accent-color:var(--accent)}
+.check a{color:var(--accent)}
+.check .req{color:var(--mute);font-size:13px}
 @media (max-width:900px){.reserve{grid-template-columns:1fr}}
 @media (max-width:560px){form,.pay{grid-template-columns:1fr}}
+
+/* FAQ: one panel open at a time; panels animate their height via grid rows */
+.faq{max-width:880px;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq h3{font-family:var(--f-body);font-size:inherit;letter-spacing:0}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 4px;background:none;border:0;text-align:left;cursor:pointer;font-size:clamp(17px,1.6vw,20px);font-weight:500;color:var(--ink);transition:color .2s}
+.faq-q:hover{color:var(--accent)}
+.faq-q::after{content:"";flex:none;width:12px;height:12px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:translateY(-3px) rotate(45deg);transition:transform .3s}
+.faq-q[aria-expanded="true"]::after{transform:translateY(3px) rotate(-135deg)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1),visibility .35s;visibility:hidden}
+.faq-a.open{grid-template-rows:1fr;visibility:visible}
+.faq-a>div{overflow:hidden}
+.faq-a p{margin:0 0 22px;padding-inline:4px;color:var(--mute);max-width:68ch}
+.faq-a p+p{margin-top:-12px}
+.faq-a a{color:var(--accent)}
+.faq-a .wa-link{vertical-align:middle}
 
 /* CONTACT + WHATSAPP */
 .contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.25fr);gap:18px}
@@ -315,7 +335,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
   <div class="wrap">
     <a href="#top" class="brand" aria-label="Eco EV home"><i></i>ECO&nbsp;EV</a>
     <nav aria-label="Main">
-      <a href="#models">Models</a><a href="#compare">Compare</a><a href="#ownership">Ownership</a><a href="#contact">Contact</a>
+      <a href="#models">Models</a><a href="#compare">Compare</a><a href="#ownership">Ownership</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
     </nav>
     <a href="#reserve" class="btn">Reserve</a>
   </div>
@@ -452,6 +472,16 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
     </div>
   </section>
 
+  <section id="faq" aria-labelledby="fqh">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">FAQ</div><h2 id="fqh">Good questions.</h2></div>
+        <p>Short answers on buying, charging and ownership. Anything else, ask us.</p>
+      </div>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+
   <section id="reserve" aria-labelledby="resh" class="alt">
     <div class="wrap reserve">
       <div class="reserve-copy">
@@ -480,6 +510,8 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
           </div>
         </fieldset>
         <label for="fNote" class="full">Anything else<textarea id="fNote" name="notes" rows="3" placeholder="Preferred colour, trade-in, timing"></textarea></label>
+        <label for="fConsent" class="full check"><input type="checkbox" id="fConsent" name="consent" value="Yes" required aria-required="true"><span>I agree that Eco EV may use my details to respond to this enquiry, as set out in the <a href="privacy.html" target="_blank" rel="noopener">Privacy Notice</a>. <span class="req">(Required)</span></span></label>
+        <label for="fMarketing" class="full check"><input type="checkbox" id="fMarketing" name="marketing" value="Yes"><span>Send me news and offers from Eco EV</span></label>
         <div class="full" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
           <span class="err" id="fErr" role="alert"></span>
           <button class="btn" type="submit">Reserve this car</button>
@@ -528,6 +560,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
       <a href="#top" class="brand" style="margin-bottom:16px"><i></i>ECO&nbsp;EV</a>
       <p>Limpopo</p>
       <p>An Eco Energy company</p>
+      <p><a href="privacy.html">Privacy</a></p>
     </div>
     <div>
       <p>Geely vehicles are supplied to Eco EV through Geely Auto South Africa's fleet programme. Eco EV is not a franchised Geely dealership.</p>
@@ -543,7 +576,7 @@ const R = n => 'R ' + n.toLocaleString('en-ZA').replace(/,/g,' ').replace(/ /g,
 
 /* ---------- vehicle data ---------- */
 const MODELS = [
- {id:'e2',name:'E2',kind:'ev',groups:['ev'],body:'hatch',badge:'Electric',tag:'City electric hatch',
+ {id:'e2',name:'E2',kind:'ev',groups:['ev'],body:'hatch',badge:'Electric',tag:'City electric hatch',plan:'5 yr / 100 000 km',
   blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, 325 km of range, a 70-litre front trunk and 375 litres of boot space.",
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
@@ -554,7 +587,7 @@ const MODELS = [
     img:{src:'e2-apex-green.webp',fit:'cut',ground:[6,5]},
     feat:['16" alloys, two-tone paint, privacy glass','Adaptive cruise and automatic emergency braking','360° camera with transparent chassis view','6-way power seat, wireless charging, 6 speakers','256-colour ambient lighting']}
   ]},
- {id:'e5emi',name:'E5 EM-i',kind:'phev',groups:['phev'],body:'suv',badge:'Plug-in hybrid',tag:'Midsize plug-in hybrid SUV',
+ {id:'e5emi',name:'E5 EM-i',kind:'phev',groups:['phev'],body:'suv',badge:'Plug-in hybrid',tag:'Midsize plug-in hybrid SUV',plan:'5 yr / 75 000 km',
   blurb:'Electric for the daily run, petrol for the long road. Up to 105 km on battery alone and a claimed 943 km on one tank and charge.',
   labels:{range:'Total range (WLTP)',power:'Electric motor',accel:'0–100 km/h',energy:'Battery',extra:'Electric range',cover:'Warranty'},
   derivs:[
@@ -565,7 +598,7 @@ const MODELS = [
     img:{src:'e5emi-apex-green.webp',fit:'cut',ground:[12,13]},
     feat:['19" low-drag alloy wheels','256-colour ambient lighting','Split-folding rear seat','Ivory White interior option']}
   ]},
- {id:'e5',name:'E5',kind:'ev',groups:['ev'],body:'suv',badge:'Electric',tag:'Midsize electric SUV',
+ {id:'e5',name:'E5',kind:'ev',groups:['ev'],body:'suv',badge:'Electric',tag:'Midsize electric SUV',plan:'6 yr / 120 000 km',
   blurb:'The flagship electric SUV. 160 kW, a short-blade LFP battery, heat pump and 100 kW DC charging, with up to 450 km of range.',
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
@@ -576,7 +609,7 @@ const MODELS = [
     img:{src:'e5-apex-front.webp',fit:'cut',ground:[7,6]},
     feat:['Larger 68.39 kWh battery, 450 km range','Head-up display and panoramic sunroof','1 000 W, 16-speaker Flyme audio','19" alloys, powered tailgate']}
   ]},
- {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
+ {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',plan:'6 yr / 120 000 km',
   blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload, up to 3 000 kg towing and a 70-litre front trunk.',
   labels:{range:'Range (NEDC)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
   derivs:[
@@ -768,13 +801,18 @@ form.addEventListener('submit',e=>{
   const name=document.getElementById('fName').value.trim(),phone=document.getElementById('fPhone').value.trim();
   if(!name){err.textContent='Add your name so we know who the car is for.';document.getElementById('fName').focus();return}
   if(phone.replace(/\D/g,'').length<9){err.textContent='Add a mobile number with at least 9 digits so we can call you.';document.getElementById('fPhone').focus();return}
+  const consent=document.getElementById('fConsent'),marketing=document.getElementById('fMarketing');
+  if(!consent.checked){err.textContent='Please tick the box to agree to the Privacy Notice, so we can use your details to reply.';consent.setAttribute('aria-invalid','true');consent.focus();return}
+  consent.removeAttribute('aria-invalid');
   err.textContent='';
   const m=MODELS.find(x=>x.id===fModel.value),d=m.derivs[+fDeriv.value];
   const ref='ECO-'+Math.random().toString(36).slice(2,7).toUpperCase();
   const pay=form.querySelector('input[name=pay]:checked').value;
-  const summary=`Reservation ${ref}\n${m.name} ${d.n} · ${R(d.price)}\nAvailability: ${stockOf(d).label}, ${stockOf(d).detail}\nPayment: ${pay}\nName: ${name}\nMobile: ${phone}\nEmail: ${document.getElementById('fEmail').value.trim()||'—'}\nNotes: ${document.getElementById('fNote').value.trim()||'—'}`;
+  const summary=`Reservation ${ref}\n${m.name} ${d.n} · ${R(d.price)}\nAvailability: ${stockOf(d).label}, ${stockOf(d).detail}\nPayment: ${pay}\nName: ${name}\nMobile: ${phone}\nEmail: ${document.getElementById('fEmail').value.trim()||'—'}\nNotes: ${document.getElementById('fNote').value.trim()||'—'}\nPrivacy consent: Yes\nNews and offers: ${marketing.checked?'Yes':'No'}`;
   document.getElementById('fRef').value=ref;document.getElementById('fPrice').value=R(d.price);document.getElementById('fStock').value=stockOf(d).label+' · '+stockOf(d).detail;
   const body=new URLSearchParams(new FormData(form));body.set('model',m.name);body.set('derivative',d.n);
+  /* an unticked checkbox is left out of FormData, so send both answers explicitly */
+  body.set('consent','Yes');body.set('marketing',marketing.checked?'Yes':'No');
   const btn=form.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Sending…';
   const show=ok=>{
     done.hidden=false;
@@ -784,7 +822,7 @@ form.addEventListener('submit',e=>{
     document.getElementById('sum').textContent=summary;
     const cp=document.getElementById('copy');
     if(cp)cp.addEventListener('click',()=>{navigator.clipboard.writeText(summary).then(()=>{cp.textContent='Copied'}).catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('sum'));const sl=getSelection();sl.removeAllRanges();sl.addRange(r);cp.textContent='Selected, press copy'})});
-    if(ok){form.querySelectorAll('input:not([type=hidden]):not([type=radio]),textarea').forEach(i=>i.value='')}
+    if(ok){form.querySelectorAll('input:not([type=hidden]):not([type=radio]):not([type=checkbox]),textarea').forEach(i=>i.value='');consent.checked=marketing.checked=false}
     done.scrollIntoView({behavior:'smooth',block:'nearest'});
   };
   fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()})
@@ -796,6 +834,45 @@ document.addEventListener('click',e=>{const r=e.target.closest('[data-res]');if(
 /* "Ask about the charger offer" adds a line to the notes without wiping what's there */
 document.addEventListener('click',e=>{const a=e.target.closest('[data-note]');if(!a)return;const n=document.getElementById('fNote'),t=a.dataset.note;
   if(!n.value.includes(t))n.value=n.value.trim()?n.value.trim()+'\n'+t:t});
+
+document.getElementById('fConsent').addEventListener('change',e=>{if(e.target.checked&&/Privacy Notice/.test(err.textContent)){err.textContent='';e.target.removeAttribute('aria-invalid')}});
+
+/* ---------- FAQ: every figure comes from MODELS / STOCK so it can't drift from the cards ---------- */
+const byId=id=>MODELS.find(m=>m.id===id);
+const cycle=m=>(m.labels.range.match(/\((\w+)\)/)||[])[1];
+const listJoin=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
+/* "E2 325 km" when every derivative agrees, else "E5 Aspire 430 km, Apex Plus 450 km" */
+const perDeriv=(m,f)=>{const v=m.derivs.map(f);return new Set(v).size===1?`${m.name} ${v[0]}`:`${m.name} `+m.derivs.map((d,i)=>`${d.n} ${v[i]}`).join(', ')};
+const rangeLine=m=>m.kind==='phev'?`${m.name} ${m.derivs[0].evKm} km electric, ${m.derivs[0].range} total`:perDeriv(m,d=>d.range);
+const dcOf=d=>(d.extra.match(/30–80% in (\d+ min)/)||d.feat.join(' ').match(/30–80% in (\d+ min)/)||[])[1];
+const dcLines=[],dcMissing=[];
+MODELS.filter(m=>m.kind==='ev').forEach(m=>{const t=m.derivs.map(dcOf);
+  if(t.every(x=>x&&x===t[0]))dcLines.push(`${t[0]} on the ${m.name}`);
+  else m.derivs.forEach((d,i)=>t[i]?dcLines.push(`${t[i]} on the ${m.name} ${d.n}`):dcMissing.push(`${m.name} ${d.n}`))});
+const phev=MODELS.find(m=>m.kind==='phev');
+const acPhev=(phev.derivs[0].feat.join(' ').match(/([\d.]+ kW) home charging/)||[])[1];
+const wait=[];MODELS.forEach(m=>m.derivs.forEach((d,i)=>d.stock==='waitlist'&&wait.push({m,d,i})));
+const cyc=c=>MODELS.filter(m=>cycle(m)===c);
+const FAQ=[
+ ['How do I buy?',`<p>Reserve online, we send you a firm quote, then you order and pay by EFT and we deliver. Current stock is ${STOCK.import.label.toLowerCase()}, with an ${STOCK.import.detail.replace('ETA about','ETA of about').replace(/\b2 weeks/,'two weeks')}.</p>`],
+ ['Can I get finance?','<p>Finance through a partner is coming soon. Choose Finance on the reservation form or mention it in your notes, and we\'ll let you know as soon as it\'s available.</p>'],
+ ['How does charging at home work?',`<p>You plug in overnight at a wall charger at home, so the car is ready each morning.${acPhev?` The ${phev.name} has ${acPhev} home charging capability, and we`:' We'} confirm the home charging time for your model on your quote.</p><p>Eco EV installs your home charger free when you buy from us. T&amp;Cs apply, and installation is subject to a site assessment.</p>`],
+ ['How far can I drive on a charge?',`<p>${cyc('WLTP').map(rangeLine).join('; ')} (WLTP). ${cyc('NEDC').map(rangeLine).join('; ')} (NEDC).</p><p>Real range depends on speed, load, heat and towing.</p>`],
+ ['What about long trips?',`<p>Top up at DC fast chargers along the way. A 30–80% charge takes about ${listJoin(dcLines)}${dcMissing.length?`; we confirm the time for the ${listJoin(dcMissing)} on your quote`:''}.</p><p>The ${phev.name} plug-in hybrid can also run on petrol, for ${phev.derivs[0].range} in total.</p>`],
+ ['Can I charge from solar?',`<p>Yes, an EV can charge from a home solar system. Eco EV is part of Eco Renewable Energy, so we can help you pair your charger with solar.</p><p><a class="wa-link" href="${WA('Hi Eco EV, I\'d like to ask about charging an EV from solar.')}" target="_blank" rel="noopener">${WA_ICON}Ask us about solar on WhatsApp</a></p>`],
+ ['What warranty do I get?',`<p>Every model has an 8-year / 200 000 km battery warranty and 5 years of unlimited roadside assistance.</p><p>${MODELS.slice().reverse().map(m=>`${m.name}: ${m.derivs[0].cover} warranty, ${m.plan} service plan`).join('. ')}.</p>`],
+ ...wait.map(({m,d,i})=>[`When is the ${m.name} ${d.n} available?`,`<p>It's ${STOCK.waitlist.label.toLowerCase()} and the next batch date isn't confirmed yet. <a href="#reserve" data-res="${m.id}" data-di="${i}">Join the waiting list</a> and we'll contact you first.</p>`]),
+ ['Where are you based?','<p>Eco EV is in Limpopo. Call <a href="tel:+27836249080">083 624 9080</a> or <a href="https://wa.me/27836249080?text=Hi%20Eco%20EV%2C%20I\'d%20like%20to%20arrange%20a%20viewing." target="_blank" rel="noopener">WhatsApp us</a> to arrange a viewing or delivery.</p>']
+];
+const faqList=document.getElementById('faqList');
+faqList.innerHTML=FAQ.map(([q,a],i)=>`<div class="faq-item"><h3><button class="faq-q" id="fq${i}" aria-expanded="false" aria-controls="fa${i}">${q}</button></h3><div class="faq-a" id="fa${i}" role="region" aria-labelledby="fq${i}"><div>${a}</div></div></div>`).join('');
+const faqBtns=[...faqList.querySelectorAll('.faq-q')];
+const faqSet=(b,open)=>{b.setAttribute('aria-expanded',open);document.getElementById(b.getAttribute('aria-controls')).classList.toggle('open',open)};
+faqList.addEventListener('click',e=>{const b=e.target.closest('.faq-q');if(!b)return;const open=b.getAttribute('aria-expanded')!=='true';faqBtns.forEach(x=>faqSet(x,x===b&&open))});
+faqList.addEventListener('keydown',e=>{const i=faqBtns.indexOf(e.target);if(i<0)return;
+  const to={ArrowDown:i+1,ArrowUp:i-1,Home:0,End:faqBtns.length-1}[e.key];if(to===undefined)return;
+  e.preventDefault();faqBtns[(to+faqBtns.length)%faqBtns.length].focus()});
+faqSet(faqBtns[0],true);
 
 /* ---------- floating WhatsApp: step aside while the reservation form (fields, submit) or the contact WhatsApp card is on screen ---------- */
 const waFloat=document.getElementById('waFloat'),waSeen=new Set();
