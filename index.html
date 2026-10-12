@@ -597,7 +597,7 @@ function drawCompare(){
     ['Powertrain',a=>a.m.badge,null],
     ['Range',a=>a.d.range+(/NEDC/.test(a.m.labels.range)?' (NEDC)':' (WLTP)'),a=>a.d.rangeKm||0],
     ['Power',a=>a.d.power,a=>parseFloat(a.d.power)||0],
-    ['0–100 km/h',a=>/s$/.test(a.d.accel)?a.d.accel:'—',a=>/s$/.test(a.d.accel)?-parseFloat(a.d.accel):-99],
+    ['0–100 km/h',a=>/s\*?$/.test(a.d.accel)?a.d.accel:'—',a=>/s\*?$/.test(a.d.accel)?-parseFloat(a.d.accel):-99],
     ['Battery',a=>a.d.energy,null],
     ['More',a=>`${a.d.extra}<small class="lab">${a.m.labels.extra}</small>`,null],
     ['Availability',a=>stockChip(a.d),null],
