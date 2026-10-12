@@ -580,10 +580,10 @@ const MODELS = [
   blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, 325 km of range, a 70-litre front trunk and 375 litres of boot space.",
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',stock:'import',price:339900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
+   {n:'Aspire',stock:'import',price:339900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',ac:{h:'6.5 h',span:'10–100%'},dc:{t:'25 min'},
     img:{src:'e2-aspire-street.webp',fit:'scene'},
     feat:['15" steel wheels, all-LED lights','14.6" touchscreen with Apple CarPlay and Android Auto','Blind spot detection and rear cross traffic alert','Rear camera and rear parking sensors','Vehicle-to-load power supply']},
-   {n:'Apex',stock:'import',price:389900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
+   {n:'Apex',stock:'import',price:389900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',ac:{h:'6.5 h',span:'10–100%'},dc:{t:'25 min'},
     img:{src:'e2-apex-green.webp',fit:'cut',ground:[6,5]},
     feat:['16" alloys, two-tone paint, privacy glass','Adaptive cruise and automatic emergency braking','360° camera with transparent chassis view','6-way power seat, wireless charging, 6 speakers','256-colour ambient lighting']}
   ]},
@@ -591,10 +591,10 @@ const MODELS = [
   blurb:'Electric for the daily run, petrol for the long road. Up to 105 km on battery alone and a claimed 943 km on one tank and charge.',
   labels:{range:'Total range (WLTP)',power:'Electric motor',accel:'0–100 km/h',energy:'Battery',extra:'Electric range',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',stock:'import',price:599999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.0 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',
+   {n:'Aspire',stock:'import',price:599999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.0 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',ac:{kw:'7 kW'},dc:{t:'20 min'},
     img:{src:'e5emi-aspire-silver.webp',fit:'cut',ground:[12,13]},
     feat:['18" alloy wheels and 6 airbags','7 kW home charging capability','Claimed 6.2 l/100 km (WLTP)','5 yr / 75 000 km service plan']},
-   {n:'Apex',stock:'import',price:679999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.1 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',
+   {n:'Apex',stock:'import',price:679999,rangeKm:943,evKm:105,range:'943 km',power:'160 kW / 262 Nm',accel:'8.1 s',energy:'18.4 kWh',extra:'105 km',cover:'6 yr / 150 000 km',ac:{kw:'7 kW'},dc:{t:'20 min'},
     img:{src:'e5emi-apex-green.webp',fit:'cut',ground:[12,13]},
     feat:['19" low-drag alloy wheels','256-colour ambient lighting','Split-folding rear seat','Ivory White interior option']}
   ]},
@@ -602,10 +602,10 @@ const MODELS = [
   blurb:'The flagship electric SUV. 160 kW, a short-blade LFP battery, heat pump and 100 kW DC charging, with up to 450 km of range.',
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',stock:'import',price:699999,rangeKm:430,range:'430 km',power:'160 kW / 320 Nm',accel:'6.9 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+   {n:'Aspire',stock:'import',price:699999,rangeKm:430,range:'430 km',power:'160 kW / 320 Nm',accel:'6.9 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',ac:{h:'6.1 h',span:'10–100%',kw:'up to 11 kW'},dc:{t:'20 min'},
     img:{src:'e5-aspire-side.webp',fit:'cut',ground:[13,12]},
     feat:['18" alloy wheels','15.4" screen, 10.2" digital cluster','Heat pump and ventilated front seats','6 yr / 120 000 km service plan']},
-   {n:'Apex Plus',stock:'import',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+   {n:'Apex Plus',stock:'import',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',ac:{h:'7 h',span:'10–100%',kw:'up to 11 kW'},dc:{t:'20 min'},
     img:{src:'e5-apex-front.webp',fit:'cut',ground:[7,6]},
     feat:['Larger 68.39 kWh battery, 450 km range','Head-up display and panoramic sunroof','1 000 W, 16-speaker Flyme audio','19" alloys, powered tailgate']}
   ]},
@@ -613,13 +613,13 @@ const MODELS = [
   blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload, up to 3 000 kg towing and a 70-litre front trunk.',
   labels:{range:'Range (NEDC)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
   derivs:[
-   {n:'Aspire Econ 2WD',stock:'import',price:611900,rangeKm:null,range:'369 km',power:'180 kW / 309 Nm',accel:'9.0 s',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'6 yr / 150 000 km',
+   {n:'Aspire Econ 2WD',stock:'import',price:611900,rangeKm:null,range:'369 km',power:'180 kW / 309 Nm',accel:'9.0 s',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'6 yr / 150 000 km',ac:{h:'7.9 h',span:'20–100%',kw:'6.6 kW'},dc:{t:'32 min',kw:'90 kW'},
     img:{src:'rd6-aspire-2wd-white.webp',fit:'scene'},
     feat:['Rear-wheel drive, 3 drive modes','17" alloys with all-terrain tyres','90 kW DC charging, 30–80% in 32 min','6.6 kW power outlet in the load bin']},
-   {n:'Aspire Econ 4WD',stock:'import',price:681900,rangeKm:null,range:'390 km',power:'280 kW / 485 Nm',accel:'7.0 s',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'6 yr / 150 000 km',
+   {n:'Aspire Econ 4WD',stock:'import',price:681900,rangeKm:null,range:'390 km',power:'280 kW / 485 Nm',accel:'7.0 s',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'6 yr / 150 000 km',ac:{h:'9.3 h',span:'20–100%',kw:'6.6 kW'},dc:{t:'30 min',kw:'90 kW'},
     img:{src:'rd6-aspire-4wd-black.webp',fit:'scene'},
     feat:['Dual-motor four-wheel drive','Sand, Mud and Off-road modes','95% maximum climbing gradient','4 airbags, 360° camera']},
-   {n:'Apex 4WD',stock:'waitlist',price:781900,rangeKm:null,range:'424 km',power:'315 kW / 595 Nm',accel:'4.5 s*',energy:'73 kWh LFP',extra:'1 030 kg / 3 000 kg',cover:'6 yr / 150 000 km',
+   {n:'Apex 4WD',stock:'waitlist',price:781900,rangeKm:null,range:'424 km',power:'315 kW / 595 Nm',accel:'4.5 s*',energy:'73 kWh LFP',extra:'1 030 kg / 3 000 kg',cover:'6 yr / 150 000 km',ac:{h:'9.3 h',span:'20–100%',kw:'6.6 kW'},dc:{t:'30 min',kw:'110 kW'},
     img:{src:'rd6-apex-4wd-green.webp',fit:'scene'},
     feat:['14.6" screen, 10.2" cluster, 8 speakers','L2+ driver assistance with 14 functions','815 mm wading and Wading mode','LED headlights, 18" alloys, 6 airbags']}
   ]}
@@ -844,21 +844,23 @@ const listJoin=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.len
 /* "E2 325 km" when every derivative agrees, else "E5 Aspire 430 km, Apex Plus 450 km" */
 const perDeriv=(m,f)=>{const v=m.derivs.map(f);return new Set(v).size===1?`${m.name} ${v[0]}`:`${m.name} `+m.derivs.map((d,i)=>`${d.n} ${v[i]}`).join(', ')};
 const rangeLine=m=>m.kind==='phev'?`${m.name} ${m.derivs[0].evKm} km electric, ${m.derivs[0].range} total`:perDeriv(m,d=>d.range);
-const dcOf=d=>(d.extra.match(/30–80% in (\d+ min)/)||d.feat.join(' ').match(/30–80% in (\d+ min)/)||[])[1];
-const dcLines=[],dcMissing=[];
-MODELS.filter(m=>m.kind==='ev').forEach(m=>{const t=m.derivs.map(dcOf);
-  if(t.every(x=>x&&x===t[0]))dcLines.push(`${t[0]} on the ${m.name}`);
-  else m.derivs.forEach((d,i)=>t[i]?dcLines.push(`${t[i]} on the ${m.name} ${d.n}`):dcMissing.push(`${m.name} ${d.n}`))});
 const phev=MODELS.find(m=>m.kind==='phev');
-const acPhev=(phev.derivs[0].feat.join(' ').match(/([\d.]+ kW) home charging/)||[])[1];
+/* one line per model; derivatives that share a figure are grouped. Percentages differ by model (E2/E5 from 10%, Riddara from 20%) so each time carries its own */
+const kwOf=(m,k)=>{const v=new Set(m.derivs.map(d=>d[k].kw));return v.size===1&&[...v][0]?[...v][0]:''};
+const timeGroups=(m,f)=>{const g=new Map();m.derivs.forEach(d=>{const t=f(d);if(t)g.set(t,[...(g.get(t)||[]),d.n])});
+  return g.size===1?[...g.keys()][0]:[...g].map(([t,ns])=>`${listJoin(ns)} ${t}`).join(', ')};
+const acLines=MODELS.filter(m=>m.derivs.every(d=>d.ac.h)).map(m=>{const kw=kwOf(m,'ac');return `${m.name}${kw?` (${kw})`:''}: ${timeGroups(m,d=>`about ${d.ac.h} (${d.ac.span})`)}`});
+const acNoTime=MODELS.filter(m=>m.derivs.some(d=>!d.ac.h));
+const dcLines=MODELS.map(m=>{const kw=kwOf(m,'dc');const per=m.derivs.some(d=>d.dc.kw)&&!kw;
+  return `${m.name}${kw?` (up to ${kw})`:''}: ${timeGroups(m,d=>`about ${d.dc.t}${per?` (up to ${d.dc.kw})`:''}`)}`});
 const wait=[];MODELS.forEach(m=>m.derivs.forEach((d,i)=>d.stock==='waitlist'&&wait.push({m,d,i})));
 const cyc=c=>MODELS.filter(m=>cycle(m)===c);
 const FAQ=[
  ['How do I buy?',`<p>Reserve online, we send you a firm quote, then you order and pay by EFT and we deliver. Current stock is ${STOCK.import.label.toLowerCase()}, with an ${STOCK.import.detail.replace('ETA about','ETA of about').replace(/\b2 weeks/,'two weeks')}.</p>`],
  ['Can I get finance?','<p>Finance through a partner is coming soon. Choose Finance on the reservation form or mention it in your notes, and we\'ll let you know as soon as it\'s available.</p>'],
- ['How does charging at home work?',`<p>You plug in overnight at a wall charger at home, so the car is ready each morning.${acPhev?` The ${phev.name} has ${acPhev} home charging capability, and we`:' We'} confirm the home charging time for your model on your quote.</p><p>Eco EV installs your home charger free when you buy from us. T&amp;Cs apply, and installation is subject to a site assessment.</p>`],
+ ['How does charging at home work?',`<p>You plug in overnight at a wall charger at home, so the car is ready each morning. Typical home charging times: ${acLines.join('. ')}.${acNoTime.map(m=>` The ${m.name} charges at up to ${m.derivs[0].ac.kw} at home; we confirm its charging time on your quote.`).join('')}</p><p>Eco EV installs your home charger free when you buy from us. T&amp;Cs apply, and installation is subject to a site assessment.</p>`],
  ['How far can I drive on a charge?',`<p>${cyc('WLTP').map(rangeLine).join('; ')} (WLTP). ${cyc('NEDC').map(rangeLine).join('; ')} (NEDC).</p><p>Real range depends on speed, load, heat and towing.</p>`],
- ['What about long trips?',`<p>Top up at DC fast chargers along the way. A 30–80% charge takes about ${listJoin(dcLines)}${dcMissing.length?`; we confirm the time for the ${listJoin(dcMissing)} on your quote`:''}.</p><p>The ${phev.name} plug-in hybrid can also run on petrol, for ${phev.derivs[0].range} in total.</p>`],
+ ['What about long trips?',`<p>Top up at DC fast chargers along the way. Typical 30–80% fast-charge times: ${dcLines.join('. ')}.</p><p>The ${phev.name} plug-in hybrid can also run on petrol, for ${phev.derivs[0].range} in total.</p>`],
  ['Can I charge from solar?',`<p>Yes, an EV can charge from a home solar system. Eco EV is part of Eco Renewable Energy, so we can help you pair your charger with solar.</p><p><a class="wa-link" href="${WA('Hi Eco EV, I\'d like to ask about charging an EV from solar.')}" target="_blank" rel="noopener">${WA_ICON}Ask us about solar on WhatsApp</a></p>`],
  ['What warranty do I get?',`<p>Every model has an 8-year / 200 000 km battery warranty and 5 years of unlimited roadside assistance.</p><p>${MODELS.slice().reverse().map(m=>`${m.name}: ${m.derivs[0].cover} warranty, ${m.plan} service plan`).join('. ')}.</p>`],
  ...wait.map(({m,d,i})=>[`When is the ${m.name} ${d.n} available?`,`<p>It's ${STOCK.waitlist.label.toLowerCase()} and the next batch date isn't confirmed yet. <a href="#reserve" data-res="${m.id}" data-di="${i}">Join the waiting list</a> and we'll contact you first.</p>`]),
