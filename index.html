@@ -185,6 +185,7 @@ tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td.best{color:var(--accent);font-weight:500}
 td .lab{display:block;margin-top:4px;font-family:var(--f-body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 td .stock{font-family:var(--f-body)}
+.cmp-note{margin:14px 0 0;font-size:12px;color:var(--mute)}
 @media (max-width:700px){.compare-pick{grid-template-columns:1fr}}
 
 /* LIFESTYLE */
@@ -320,6 +321,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
       </div>
       <div class="compare-pick" id="cmpPick"></div>
       <div class="table-wrap"><table id="cmpTable"></table></div>
+      <p class="cmp-note" id="cmpNote" hidden>*0–100 km/h in 4.5 s with HT tyres in specific conditions, as stated by Geely.</p>
     </div>
   </section>
 
@@ -609,6 +611,7 @@ function drawCompare(){
       let best=-1;if(score){const sc=sel.map(score);const mx=Math.max(...sc);if(sc.filter(v=>v===mx).length<3)best=sc.indexOf(mx)}
       return `<tr><th scope="row">${lab}</th>${sel.map((a,i)=>`<td class="${i===best?'best':''}">${fmt(a)}</td>`).join('')}</tr>`}).join('')
   }</tbody>`;
+  document.getElementById('cmpNote').hidden=!sel.some(a=>a.key==='rd6:2');
 }
 drawCompare();
 
