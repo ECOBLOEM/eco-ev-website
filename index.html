@@ -143,11 +143,17 @@ section{padding-block:clamp(70px,10vw,130px)}
 @media (max-width:420px){.specs{grid-template-columns:1fr}}
 
 /* photos replace renders when present */
-.m-visual .photo{display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.m-visual .photo{display:none;position:relative;z-index:1;animation:swapIn .6s cubic-bezier(.2,.8,.2,1)}
 .m-visual.has-photo .photo{display:block}
-.m-visual.has-photo .swap,.m-visual.has-photo .big{display:none}
-.hero-car.has-photo{aspect-ratio:21/9;max-width:100%}
-.hero-car.has-photo .hero-tag{z-index:1;text-shadow:0 1px 8px #000}
+.m-visual.has-photo .swap{display:none}
+.m-visual.is-scene .big{display:none}
+.photo.cut{width:100%;max-width:640px;height:auto;margin-inline:auto;filter:drop-shadow(0 28px 26px rgba(0,0,0,.75)) drop-shadow(0 0 46px color-mix(in srgb,var(--k) 22%,transparent))}
+.photo.cut.small{max-width:420px}
+.photo.scene{width:100%;height:auto;border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.55)}
+.hero-car.is-scene{display:grid;place-items:center}
+.hero-car .photo.scene{max-width:920px;border:0;box-shadow:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent),linear-gradient(transparent,#000 9%,#000 72%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent),linear-gradient(transparent,#000 9%,#000 72%,transparent);mask-composite:intersect}
+.hero-car .hero-tag{z-index:2;text-shadow:0 1px 10px #000}
+.hero-note{margin-top:12px;font-size:12px}
 .swap{width:100%;display:grid;place-items:center;animation:swapIn .6s cubic-bezier(.2,.8,.2,1)}
 @keyframes swapIn{from{opacity:.35;transform:translateX(-18px)}}
 .model .slot{color:var(--k);opacity:.75}
@@ -171,6 +177,14 @@ tbody td{font-family:var(--f-num);font-size:19px}
 tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
 td.best{color:var(--ice)}
 @media (max-width:700px){.compare-pick{grid-template-columns:1fr}}
+
+/* LIFESTYLE */
+.life{position:relative;padding-block:0;min-height:clamp(340px,44vw,640px);display:grid;align-items:end;overflow:hidden;isolation:isolate}
+.life img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.life::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,var(--void) 2%,rgba(5,7,11,.55) 38%,transparent 70%),linear-gradient(90deg,rgba(5,7,11,.7),transparent 60%)}
+.life-copy{padding-block:clamp(28px,5vw,64px);display:grid;gap:14px;justify-items:start;width:100%}
+.life-copy h2{font-size:clamp(28px,4.4vw,60px)}
+.life-copy p{margin:0;max-width:44ch;color:var(--ink)}
 
 /* OWNERSHIP */
 .own{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
@@ -245,15 +259,16 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
         </div>
       </div>
       <div class="hero-car m-visual" id="heroCar">
-        <div class="hero-tag t1">Power <b class="num">315 kW</b></div>
-        <div class="hero-tag t2">Torque <b class="num">595 Nm</b></div>
+        <div class="hero-tag t1">0–100 km/h <b class="num">4.5 s*</b></div>
+        <div class="hero-tag t2">Wading <b class="num">815 mm</b></div>
       </div>
       <div class="stats">
         <div class="stat"><div class="v num">315<small>KW</small></div><div class="l">Dual-motor output</div></div>
         <div class="stat"><div class="v num">595<small>NM</small></div><div class="l">Instant torque</div></div>
         <div class="stat"><div class="v num">3 000<small>KG</small></div><div class="l">Towing, up to</div></div>
-        <div class="stat"><div class="v num">73<small>KWH</small></div><div class="l">LFP battery</div></div>
+        <div class="stat"><div class="v num">424<small>KM</small></div><div class="l">Range (NEDC)</div></div>
       </div>
+      <p class="fine hero-note">*0–100 km/h in 4.5 s with HT tyres in specific conditions, as stated by Geely. Riddara range is quoted on the NEDC cycle.</p>
     </div>
   </section>
 
@@ -298,17 +313,27 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
     </div>
   </section>
 
+  <section class="life" aria-labelledby="lh">
+    <img src="images/life-weekend.webp" alt="Geely E5 EM-i parked lakeside with its tailgate open" loading="lazy">
+    <div class="wrap life-copy">
+      <div class="eyebrow">Geely E5 EM-i</div>
+      <h2 id="lh">Weekends, sorted.</h2>
+      <p>943 km of combined range, a powered tailgate and vehicle-to-load power for the campsite.</p>
+      <a href="#m-e5emi" class="btn">See the E5 EM-i</a>
+    </div>
+  </section>
+
   <section id="ownership" aria-labelledby="oh">
     <div class="wrap">
       <div class="sec-head">
         <div><div class="eyebrow">Ownership</div><h2 id="oh">What comes with it.</h2></div>
-        <p>Inclusions as announced by Geely Auto South Africa at launch. We confirm the exact package on your quote.</p>
+        <p>From Geely Auto South Africa's official specification sheets. We confirm the exact package on your quote.</p>
       </div>
       <div class="own">
-        <div><span class="k num">8 yr</span><h3>Battery warranty</h3><p>8 years or 200 000 km on the E2 and E5 battery packs.</p></div>
-        <div><span class="k num">6 yr</span><h3>E5 cover</h3><p>6 yr / 150 000 km vehicle warranty and a 6 yr / 120 000 km service plan on the E5.</p></div>
-        <div><span class="k num">Home</span><h3>Wallbox charger</h3><p>A home wallbox is included with the E2 and E5.</p></div>
-        <div><span class="k num">5 yr</span><h3>Coolray cover</h3><p>5 yr / 150 000 km warranty and a 5 yr / 50 000 km service plan.</p></div>
+        <div><span class="k num">8 yr</span><h3>Battery warranty</h3><p>8 years or 200 000 km on the battery of every Riddara, E5, E5 EM-i and E2.</p></div>
+        <div><span class="k num">6 yr</span><h3>Riddara and E5 cover</h3><p>6 yr / 150 000 km vehicle warranty and a 6 yr / 120 000 km service plan.</p></div>
+        <div><span class="k num">5 yr</span><h3>Roadside assistance</h3><p>5 years of unlimited roadside assistance on the Riddara, E5, E5 EM-i and E2.</p></div>
+        <div><span class="k num">5 yr</span><h3>E2 and EM-i plans</h3><p>E2: 4 yr / 150 000 km warranty, 5 yr / 100 000 km service plan. E5 EM-i: 6 yr / 150 000 km warranty, 5 yr / 75 000 km service plan.</p></div>
       </div>
     </div>
   </section>
@@ -360,7 +385,7 @@ footer{border-top:1px solid var(--line);padding-block:48px calc(48px + env(safe-
     </div>
     <div>
       <p>Geely vehicles are supplied to Eco EV through Geely Auto South Africa's fleet programme. Eco EV is not a franchised Geely dealership.</p>
-      <p>Prices are recommended retail prices announced by Geely Auto South Africa at each model's launch, including VAT, and may change. Specifications are manufacturer claims (WLTP unless stated). Vehicle illustrations are artistic renders, not photographs.</p>
+      <p>Prices are recommended retail prices announced by Geely Auto South Africa at each model's launch, including VAT, and may change. Specifications are from Geely Auto South Africa specification sheets and brochures and may change without notice. Range is WLTP unless marked NEDC. Geely includes a home wallbox charger on some models subject to its terms and Geely Finance approval; we confirm what is included with a straight purchase on your quote. Vehicle photographs are supplied by Geely and may show overseas specification; the Coolray is shown as an illustration.</p>
       <p>Geely, Riddara and model names are trademarks of their respective owners.</p>
     </div>
   </div>
@@ -373,13 +398,15 @@ const R = n => 'R ' + n.toLocaleString('en-ZA').replace(/,/g,' ').replace(/ /g,
 /* ---------- vehicle data ---------- */
 const MODELS = [
  {id:'e2',name:'E2',kind:'ev',groups:['ev'],body:'hatch',badge:'Electric',tag:'City electric hatch',
-  blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, a 70-litre front trunk and a home wallbox in the price.",
-  labels:{range:'Range',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Fast charge',cover:'Battery warranty'},
+  blurb:"South Africa's most affordable EV at launch. Rear-wheel drive, 325 km of range, a 70-litre front trunk and 375 litres of boot space.",
+  labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',price:339900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% ≈ 25 min',cover:'8 yr / 200 000 km',
-    feat:['15" wheels, LED head- and taillights','Keyless entry and start','Apple CarPlay and Android Auto','Reverse camera and rear sensors','3.3 kW vehicle-to-load']},
-   {n:'Apex',price:389900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% ≈ 25 min',cover:'8 yr / 200 000 km',
-    feat:['16" alloys and two-tone paint','Vegan leather and wireless charging','360° camera with chassis view','Adaptive cruise, AEB, lane departure warning','3.3 kW vehicle-to-load']}
+   {n:'Aspire',price:339900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
+    img:{src:'e2-aspire-street.webp',fit:'scene'},
+    feat:['15" steel wheels, all-LED lights','14.6" touchscreen with Apple CarPlay and Android Auto','Blind spot detection and rear cross traffic alert','Rear camera and rear parking sensors','Vehicle-to-load power supply']},
+   {n:'Apex',price:389900,rangeKm:325,range:'325 km',power:'85 kW / 150 Nm',accel:'11.5 s',energy:'39.4 kWh LFP',extra:'30–80% in 25 min',cover:'4 yr / 150 000 km',
+    img:{src:'e2-apex-green.webp',fit:'cut',small:true},
+    feat:['16" alloys, two-tone paint, privacy glass','Adaptive cruise and automatic emergency braking','360° camera with transparent chassis view','6-way power seat, wireless charging, 6 speakers','256-colour ambient lighting']}
   ]},
  {id:'coolray',name:'Coolray',kind:'petrol',groups:['petrol'],body:'crossover',badge:'Turbo petrol',tag:'Compact performance SUV',
   blurb:'For buyers not ready to plug in. A 1.5-litre turbo with 128 kW, a seven-speed dual-clutch gearbox and a claimed 6.5 l/100 km.',
@@ -394,34 +421,42 @@ const MODELS = [
   ]},
  {id:'e5emi',name:'E5 EM-i',kind:'phev',groups:['phev'],body:'suv',badge:'Plug-in hybrid',tag:'Midsize plug-in hybrid SUV',
   blurb:'Electric for the daily run, petrol for the long road. Up to 83 km on battery alone and a claimed 943 km on one tank and charge.',
-  labels:{range:'Total range',power:'System power',accel:'0–100 km/h',energy:'Battery',extra:'Electric range',cover:'Service plan'},
+  labels:{range:'Total range (WLTP)',power:'Electric motor',accel:'0–100 km/h',energy:'Battery',extra:'Electric range',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',price:599999,rangeKm:943,evKm:83,range:'943 km',power:'193 kW',accel:'8.0 s',energy:'18.4 kWh',extra:'83 km',cover:'5 yr / 75 000 km',
-    feat:['1.5-litre engine plus 160 kW e-motor','Pure, Hybrid and Power modes','Claimed 6.2 l/100 km (WLTP)','5 yr / 75 000 km service plan']},
-   {n:'Apex',price:679999,rangeKm:943,evKm:83,range:'943 km',power:'193 kW',accel:'8.1 s',energy:'18.4 kWh',extra:'83 km',cover:'5 yr / 75 000 km',
-    feat:['1.5-litre engine plus 160 kW e-motor','Pure, Hybrid and Power modes','Higher specification cabin','5 yr / 75 000 km service plan']}
+   {n:'Aspire',price:599999,rangeKm:943,evKm:83,range:'943 km',power:'160 kW / 262 Nm',accel:'8.0 s',energy:'18.4 kWh',extra:'83 km',cover:'6 yr / 150 000 km',
+    img:{src:'e5emi-aspire-silver.webp',fit:'cut'},
+    feat:['18" alloy wheels and 6 airbags','7 kW wallbox charger','Claimed 6.2 l/100 km (WLTP)','5 yr / 75 000 km service plan']},
+   {n:'Apex',price:679999,rangeKm:943,evKm:83,range:'943 km',power:'160 kW / 262 Nm',accel:'8.1 s',energy:'18.4 kWh',extra:'83 km',cover:'6 yr / 150 000 km',
+    img:{src:'e5emi-apex-green.webp',fit:'cut'},
+    feat:['19" low-drag alloy wheels','256-colour ambient lighting','Split-folding rear seat','Ivory White interior option']}
   ]},
  {id:'e5',name:'E5',kind:'ev',groups:['ev'],body:'suv',badge:'Electric',tag:'Midsize electric SUV',
-  blurb:'The flagship electric SUV. 160 kW, short-blade LFP battery and 100 kW DC charging, with up to 450 km of range.',
-  labels:{range:'Range',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Fast charge',cover:'Warranty'},
+  blurb:'The flagship electric SUV. 160 kW, a short-blade LFP battery, heat pump and 100 kW DC charging, with up to 450 km of range.',
+  labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
-   {n:'Aspire',price:699999,rangeKm:430,range:'430 km',power:'160 kW / 320 Nm',accel:'6.9 s',energy:'60.22 kWh LFP',extra:'30–80% ≈ 20 min',cover:'6 yr / 150 000 km',
-    feat:['160 kW front e-motor','100 kW DC fast charging','Home wallbox included','6 yr / 120 000 km service plan']},
-   {n:'Apex',price:759999,rangeKm:410,range:'410 km',power:'160 kW / 320 Nm',accel:'7.1 s',energy:'60.22 kWh LFP',extra:'30–80% ≈ 20 min',cover:'6 yr / 150 000 km',
-    feat:['15.4" touchscreen, 10.2" digital cluster','Wireless charging and voice control','Home wallbox included','6 yr / 120 000 km service plan']},
-   {n:'Apex Plus',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% ≈ 20 min',cover:'6 yr / 150 000 km',
-    feat:['Head-up display and panoramic roof','1 000 W, 16-speaker Flyme audio','Heated, ventilated, massage front seats','19" alloys, powered tailgate']}
+   {n:'Aspire',price:699999,rangeKm:430,range:'430 km',power:'160 kW / 320 Nm',accel:'6.9 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+    img:{src:'e5-aspire-side.webp',fit:'cut'},
+    feat:['18" alloy wheels','15.4" screen, 10.2" digital cluster','Heat pump and ventilated front seats','6 yr / 120 000 km service plan']},
+   {n:'Apex',price:759999,rangeKm:410,range:'410 km',power:'160 kW / 320 Nm',accel:'7.1 s',energy:'60.22 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+    img:{src:'e5-apex-front.webp',fit:'cut'},
+    feat:['19" low-drag alloy wheels','Head-up display and panoramic sunroof','Front seat massage and memory','Adaptive cruise and lane change assist']},
+   {n:'Apex Plus',price:788888,rangeKm:450,range:'450 km',power:'160 kW / 320 Nm',accel:'7.6 s',energy:'68.39 kWh LFP',extra:'30–80% in 20 min',cover:'6 yr / 150 000 km',
+    img:{src:'e5-apex-front.webp',fit:'cut'},
+    feat:['Larger 68.39 kWh battery, 450 km range','Head-up display and panoramic sunroof','1 000 W, 16-speaker Flyme audio','19" alloys, powered tailgate']}
   ]},
  {id:'rd6',name:'Riddara RD6',kind:'ev',groups:['ev','bakkie'],body:'bakkie',badge:'Electric bakkie',tag:'Electric double cab',
-  blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload and up to 3 000 kg towing, with no fuel bill.',
-  labels:{range:'Range',power:'Power',accel:'Drive',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
+  blurb:'A bakkie that drives like an SUV. Up to 315 kW, over a ton of payload, up to 3 000 kg towing and a 70-litre front trunk.',
+  labels:{range:'Range (NEDC)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'Payload / tow',cover:'Warranty'},
   derivs:[
-   {n:'Econ 2WD',price:611900,rangeKm:314,range:'314 km',power:'Rear motor',accel:'RWD',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'Confirm on quote',
-    feat:['Rear-wheel drive','Unibody double cab','1 115 kg payload','2 500 kg towing']},
-   {n:'Econ 4WD',price:681900,rangeKm:332,range:'332 km',power:'280 kW / 485 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'Confirm on quote',
-    feat:['Dual-motor all-wheel drive','Sand, Mud, Off-road and Wading modes','1 235 kg payload','3 000 kg towing']},
-   {n:'Apex 4WD',price:781900,rangeKm:null,range:'Confirm on quote',power:'315 kW / 595 Nm',accel:'Dual-motor 4WD',energy:'73 kWh LFP',extra:'Up to 3 000 kg tow',cover:'Confirm on quote',
-    feat:['One of the most powerful bakkies in SA','14.6" centre screen, 10.2" cluster','Dual-motor all-wheel drive','Up to 3 000 kg towing']}
+   {n:'Aspire 2WD',price:611900,rangeKm:null,range:'369 km',power:'180 kW / 309 Nm',accel:'9.0 s',energy:'63 kWh LFP',extra:'1 115 kg / 2 500 kg',cover:'6 yr / 150 000 km',
+    img:{src:'rd6-aspire-2wd-white.webp',fit:'scene'},
+    feat:['Rear-wheel drive, 3 drive modes','17" alloys with all-terrain tyres','90 kW DC charging, 30–80% in 32 min','6.6 kW power outlet in the load bin']},
+   {n:'Aspire 4WD',price:681900,rangeKm:null,range:'390 km',power:'280 kW / 485 Nm',accel:'7.0 s',energy:'73 kWh LFP',extra:'1 235 kg / 3 000 kg',cover:'6 yr / 150 000 km',
+    img:{src:'rd6-aspire-4wd-black.webp',fit:'scene'},
+    feat:['Dual-motor four-wheel drive','Sand, Mud and Off-road modes','95% maximum climbing gradient','4 airbags, 360° camera']},
+   {n:'Apex 4WD',price:781900,rangeKm:null,range:'424 km',power:'315 kW / 595 Nm',accel:'4.5 s*',energy:'73 kWh LFP',extra:'1 030 kg / 3 000 kg',cover:'6 yr / 150 000 km',
+    img:{src:'rd6-apex-4wd-green.webp',fit:'scene'},
+    feat:['14.6" screen, 10.2" cluster, 8 speakers','L2+ driver assistance with 14 functions','815 mm wading and Wading mode','LED headlights, 18" alloys, 6 airbags']}
   ]}
 ];
 const COLORS={ev:'#7fe3ff',phev:'#a98cff',petrol:'#ffb45c'};
@@ -479,10 +514,13 @@ function carSVG(shapeKey,color,opts={}){
 
 const slug=t=>t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function variant(m,i){const n=m.derivs[i].n;return {spokes:[5,6,10][i]||5,drive:/4wd/i.test(n)?'4wd':/2wd/i.test(n)?'rwd':''}}
-function photo(m,d){return `<img class="photo" alt="${m.name} ${d.n}" src="images/${m.id}-${slug(d.n)}.jpg" data-fb="images/${m.id}.jpg" onload="this.parentNode.classList.add('has-photo')" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.remove()}">`}
+function imgOf(m,d){return d.img||m.img||null}
+function photo(m,d){const im=imgOf(m,d);if(!im)return '';
+  return `<img class="photo ${im.fit}${im.small?' small':''}" alt="Geely ${m.name} ${d.n}" src="images/${im.src}" loading="lazy" onerror="this.parentNode.classList.remove('has-photo','is-${im.fit}');this.remove()">`}
 window.__photo=photo;
 /* hero car */
-document.getElementById('heroCar').insertAdjacentHTML('beforeend',`<div class="swap">${carSVG('bakkie','#7fe3ff',{label:'Light-traced render of the Riddara RD6 Apex 4WD',spokes:10,drive:'4wd'})}</div><img class="photo" alt="Riddara RD6 Apex 4WD" src="images/hero.jpg" data-fb="images/rd6-apex-4wd.jpg" onload="this.parentNode.classList.add('has-photo')" onerror="if(this.dataset.fb){this.src=this.dataset.fb;this.dataset.fb=''}else{this.remove()}">`);
+const heroCar=document.getElementById('heroCar');heroCar.classList.add('has-photo','is-scene');
+heroCar.insertAdjacentHTML('beforeend',`<div class="swap">${carSVG('bakkie','#7fe3ff',{label:'Light-traced render of the Riddara RD6 Apex 4WD',spokes:10,drive:'4wd'})}</div><img class="photo scene" alt="Geely Riddara RD6 Apex 4WD in blue" src="images/rd6-hero-blue.webp" fetchpriority="high" onerror="this.parentNode.classList.remove('has-photo','is-scene');this.remove()">`);
 
 /* ---------- model stages ---------- */
 let filter='all';
@@ -512,7 +550,7 @@ function renderModel(m){
         <a href="#compare" class="btn ghost" data-cmp="${m.id}">Compare</a>
       </div>
     </div>
-    <div class="m-visual">
+    <div class="m-visual${imgOf(m,d)?' has-photo is-'+imgOf(m,d).fit:''}">
       <span class="big" aria-hidden="true">${d.n.split(' ')[0]}</span>
       <div class="swap">${carSVG(m.body,COLORS[m.kind],{label:`Light-traced render of the ${m.name} ${d.n}`,...variant(m,state[m.id])})}</div>
       ${photo(m,d)}
@@ -550,7 +588,7 @@ function drawCompare(){
   const rows=[
     ['Price',a=>R(a.d.price),a=>-a.d.price],
     ['Powertrain',a=>a.m.badge,null],
-    ['Range',a=>a.m.kind==='petrol'?'Petrol · '+a.d.range:a.d.range,a=>a.d.rangeKm||0],
+    ['Range',a=>a.m.kind==='petrol'?'Petrol · '+a.d.range:a.d.range+(/NEDC/.test(a.m.labels.range)?' (NEDC)':' (WLTP)'),a=>a.d.rangeKm||0],
     ['Power',a=>a.d.power,a=>parseFloat(a.d.power)||0],
     ['0–100 km/h',a=>/s$/.test(a.d.accel)?a.d.accel:'—',a=>/s$/.test(a.d.accel)?-parseFloat(a.d.accel):-99],
     ['Battery / engine',a=>a.d.energy,null],
