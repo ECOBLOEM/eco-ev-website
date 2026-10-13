@@ -296,6 +296,7 @@ form label.check{display:flex;gap:12px;align-items:start;text-transform:none;let
 footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px calc(104px + env(safe-area-inset-bottom,0px))} /* extra bottom room for the floating WhatsApp button */
 .foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:40px;font-size:13px;color:var(--mute)}
 .foot p{margin:0 0 10px}
+.foot .legal{font-size:12px}
 .foot-brand{display:inline-flex;margin-bottom:16px}
 @media (max-width:760px){.foot{grid-template-columns:1fr}}
 

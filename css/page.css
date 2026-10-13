@@ -37,6 +37,9 @@ section li+li{margin-top:6px}
 .contact{list-style:none;padding:0}
 .btn{display:inline-flex;align-items:center;padding:14px 24px;border-radius:var(--r);background:var(--accent);color:#fff;font-family:var(--f-display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;margin-top:36px}
 .btn:hover{background:var(--accent-hover);color:#fff}
+footer p{margin:0}
+footer p+p{margin-top:6px}
+footer .legal{font-size:12px}
 footer{border-top:1px solid var(--line);padding-block:32px calc(32px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--mute)}
 @media (max-width:420px){.back{font-size:12px;letter-spacing:.08em}}
 
