@@ -284,7 +284,7 @@ const timeGroups=(m,f)=>{const g=new Map();m.derivs.forEach(d=>{const t=f(d);if(
   return g.size===1?[...g.keys()][0]:[...g].map(([t,ns])=>`${listJoin(ns)} ${t}`).join(', ')};
 /* home7: models quoted on a faster charger also get their time on the included 7 kW wall charger */
 const acLines=MODELS.filter(m=>m.derivs.every(d=>d.ac.h)).map(m=>{const kw=kwOf(m,'ac');
-  if(m.home7)return `${m.name}: ${timeGroups(m,d=>`about ${d.ac.h}`)} (${m.derivs[0].ac.span}) on an ${kw.replace('up to ','')} charger. On the included 7&nbsp;kW home charger, allow ${m.home7}, still a full charge overnight`;
+  if(m.home7)return `${m.name}: ${timeGroups(m,d=>`about ${d.ac.h}`)} (${m.derivs[0].ac.span}) on an ${kw.replace('up to ','')} charger. On the included 7&nbsp;kW home charger, allow ${m.home7}, which fits in a normal night at home. Most drivers don't need to charge every night: plug in when you get home and you start the day with plenty of range`;
   return `${m.name}${kw?` (${kw})`:''}: ${timeGroups(m,d=>`about ${d.ac.h} (${d.ac.span})`)}`});
 const acNoTime=MODELS.filter(m=>m.derivs.some(d=>!d.ac.h));
 const dcLines=MODELS.map(m=>{const kw=kwOf(m,'dc');const per=m.derivs.some(d=>d.dc.kw)&&!kw;
