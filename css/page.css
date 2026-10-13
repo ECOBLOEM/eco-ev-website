@@ -45,3 +45,9 @@ footer{border-top:1px solid var(--line);padding-block:32px calc(32px + env(safe-
 
 /* 404 */
 .nf{min-height:calc(100vh - 190px)}
+
+/* terms anchors and footer links */
+section[id]{scroll-margin-top:24px}
+section:target h2{color:var(--accent)}
+.foot-links a{color:var(--mute)}
+.foot-links a:hover{color:var(--accent)}

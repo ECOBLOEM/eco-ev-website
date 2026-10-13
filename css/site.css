@@ -315,3 +315,6 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
 /* price disclaimer and reservation wording */
 .price-note{margin:22px 0 0;font-size:13px;color:var(--mute);max-width:80ch}
 .form-fine{margin:-6px 0 0;font-size:13px;color:var(--mute)}
+
+/* T&Cs links */
+.charger-copy a:not(.btn),.feats a,.foot a{color:var(--accent);text-underline-offset:2px}

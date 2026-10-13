@@ -58,7 +58,7 @@ const STOCK={
 };
 const stockOf=d=>STOCK[d.stock];
 const stockChip=d=>`<span class="stock s-${d.stock}"><i aria-hidden="true"></i>${stockOf(d).label} · ${stockOf(d).detail}</span>`;
-const CHARGER_FEAT='Free home charger installation (T&amp;Cs apply)';
+const CHARGER_FEAT='Free home charger installation (<a href="terms.html#charger">T&amp;Cs&nbsp;apply</a>)';
 const WA=msg=>'https://wa.me/27836249080?text='+encodeURIComponent(msg);
 const EFT_NOTE='<div class="eft-note" role="note"><p>Eco EV will never change our banking details by email or WhatsApp. Always phone us on <a href="tel:+27836249080">083 624 9080</a> to confirm banking details before you pay.</p></div>';
 const WA_ICON='<i class="wa-ico" aria-hidden="true"></i>';
@@ -291,7 +291,7 @@ const cyc=c=>MODELS.filter(m=>cycle(m)===c);
 const FAQ=[
  ['How do I buy?',`<p>Reserve online, we send you a firm quote, then you order and pay by EFT and we deliver. Current stock is ${STOCK.import.label.toLowerCase()}, with an ${STOCK.import.detail.replace('ETA about','ETA of about').replace(/\b2 weeks/,'two weeks')}.</p>${EFT_NOTE}`],
  ['Can I get finance?','<p>Finance through a partner is coming soon. Choose Finance on the reservation form or mention it in your notes, and we\'ll let you know as soon as it\'s available.</p>'],
- ['How does charging at home work?',`<p>You plug in overnight at a wall charger at home, so the car is ready each morning. Typical home charging times: ${acLines.join('. ')}.${acNoTime.map(m=>` The ${m.name} charges at up to ${m.derivs[0].ac.kw} at home; we confirm its charging time on your quote.`).join('')}</p><p>Eco EV installs your home charger free when you buy from us. T&amp;Cs apply, and installation is subject to a site assessment.</p>`],
+ ['How does charging at home work?',`<p>You plug in overnight at a wall charger at home, so the car is ready each morning. Typical home charging times: ${acLines.join('. ')}.${acNoTime.map(m=>` The ${m.name} charges at up to ${m.derivs[0].ac.kw} at home; we confirm its charging time on your quote.`).join('')}</p><p>Every vehicle comes with a 3&nbsp;kW portable charger and a 7&nbsp;kW home wall charger. We install the wall charger free on delivery day, with up to 15&nbsp;m of cable included. Installation in Gauteng, Limpopo and the Free State. <a href="terms.html#charger">T&amp;Cs&nbsp;apply</a>.</p>`],
  ['How far can I drive on a charge?',`<p>${cyc('WLTP').map(rangeLine).join('; ')} (WLTP). ${cyc('NEDC').map(rangeLine).join('; ')} (NEDC).</p><p>Real range depends on speed, load, heat and towing.</p>`],
  ['What about long trips?',`<p>Top up at DC fast chargers along the way. Typical 30–80% fast-charge times: ${dcLines.join('. ')}.</p><p>The ${phev.name} plug-in hybrid can also run on petrol, for ${phev.derivs[0].range} in total.</p>`],
  ['Can I charge from solar?',`<p>Yes, an EV can charge from a home solar system.</p><p><a class="wa-link" href="${WA('Hi Eco EV, I\'d like to ask about charging an EV from solar.')}" target="_blank" rel="noopener noreferrer">${WA_ICON}Ask us about pairing your home charger with solar</a></p>`],
