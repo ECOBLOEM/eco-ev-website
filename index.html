@@ -559,8 +559,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding-block:56px 
   <div class="wrap foot">
     <div>
       <a href="#top" class="brand" aria-label="Eco EV, back to top" style="margin-bottom:16px;display:inline-flex"><svg class="logo" viewBox="0 0 1320 220" aria-hidden="true" focusable="false"><use href="#ecoLogo"/></svg></a>
-      <p>Limpopo</p>
-      <p>An Eco Energy company</p>
+      <p>Eco EV · Limpopo</p>
       <p><a href="privacy.html">Privacy</a></p>
     </div>
     <div>
@@ -862,7 +861,7 @@ const FAQ=[
  ['How does charging at home work?',`<p>You plug in overnight at a wall charger at home, so the car is ready each morning. Typical home charging times: ${acLines.join('. ')}.${acNoTime.map(m=>` The ${m.name} charges at up to ${m.derivs[0].ac.kw} at home; we confirm its charging time on your quote.`).join('')}</p><p>Eco EV installs your home charger free when you buy from us. T&amp;Cs apply, and installation is subject to a site assessment.</p>`],
  ['How far can I drive on a charge?',`<p>${cyc('WLTP').map(rangeLine).join('; ')} (WLTP). ${cyc('NEDC').map(rangeLine).join('; ')} (NEDC).</p><p>Real range depends on speed, load, heat and towing.</p>`],
  ['What about long trips?',`<p>Top up at DC fast chargers along the way. Typical 30–80% fast-charge times: ${dcLines.join('. ')}.</p><p>The ${phev.name} plug-in hybrid can also run on petrol, for ${phev.derivs[0].range} in total.</p>`],
- ['Can I charge from solar?',`<p>Yes, an EV can charge from a home solar system. Eco EV is part of Eco Renewable Energy, so we can help you pair your charger with solar.</p><p><a class="wa-link" href="${WA('Hi Eco EV, I\'d like to ask about charging an EV from solar.')}" target="_blank" rel="noopener">${WA_ICON}Ask us about solar on WhatsApp</a></p>`],
+ ['Can I charge from solar?',`<p>Yes, an EV can charge from a home solar system.</p><p><a class="wa-link" href="${WA('Hi Eco EV, I\'d like to ask about charging an EV from solar.')}" target="_blank" rel="noopener">${WA_ICON}Ask us about pairing your home charger with solar</a></p>`],
  ['What warranty do I get?',`<p>Every model has an 8-year / 200 000 km battery warranty and 5 years of unlimited roadside assistance.</p><p>${MODELS.slice().reverse().map(m=>`${m.name}: ${m.derivs[0].cover} warranty, ${m.plan} service plan`).join('. ')}.</p>`],
  ...wait.map(({m,d,i})=>[`When is the ${m.name} ${d.n} available?`,`<p>It's ${STOCK.waitlist.label.toLowerCase()} and the next batch date isn't confirmed yet. <a href="#reserve" data-res="${m.id}" data-di="${i}">Join the waiting list</a> and we'll contact you first.</p>`]),
  ['Where are you based?','<p>Eco EV is in Limpopo. Call <a href="tel:+27836249080">083 624 9080</a> or <a href="https://wa.me/27836249080?text=Hi%20Eco%20EV%2C%20I\'d%20like%20to%20arrange%20a%20viewing." target="_blank" rel="noopener">WhatsApp us</a> to arrange a viewing or delivery.</p>']
