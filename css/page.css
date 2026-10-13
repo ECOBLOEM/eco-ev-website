@@ -1,0 +1,44 @@
+/* Simple pages (privacy, 404): same daylight palette and type as index.html */
+:root{
+  --bg:#F7F4EF;--cream:#EFEAE2;--card:#FFFFFF;--line:#E4DED5;--ink:#1E2124;--mute:#65686C;
+  --accent:#1F6B73;--accent-hover:#17565C;--accent-tint:#E8F0F0;
+  --shadow:0 10px 30px rgba(30,33,36,.06);--r:6px;--r-lg:12px;
+  --f-display:"Michroma","Eurostile","Arial Black",sans-serif;
+  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(16px,4vw,56px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent-hover)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:760px;margin-inline:auto;padding-inline:var(--gutter)}
+header{border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+/* logo: shapes from brand/svg/eco-ev-logo.svg, cropped to the drawing (ring edge to the end of "V") */
+.brand{display:flex;align-items:center;text-decoration:none;flex:none}
+.brand .logo{display:block;height:22px;width:auto;aspect-ratio:1320/220}
+.back{font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.back::before{content:"← "}
+main{padding-block:clamp(48px,8vw,96px)}
+.eyebrow{font-family:var(--f-display);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute)}
+h1,h2{font-family:var(--f-display);font-weight:400;letter-spacing:.01em;line-height:1.2;margin:0;text-wrap:balance}
+h1{font-size:clamp(28px,4.4vw,46px);margin-top:14px}
+.lead{color:var(--mute);margin:18px 0 0}
+.updated{font-size:14px;color:var(--mute);margin:10px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:clamp(22px,4vw,44px);margin-top:40px}
+section+section{border-top:1px solid var(--line);margin-top:28px;padding-top:28px}
+h2{font-size:15px;letter-spacing:.06em}
+section p,section ul{margin:12px 0 0}
+section ul{padding-left:20px}
+section li+li{margin-top:6px}
+.contact{list-style:none;padding:0}
+.btn{display:inline-flex;align-items:center;padding:14px 24px;border-radius:var(--r);background:var(--accent);color:#fff;font-family:var(--f-display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;margin-top:36px}
+.btn:hover{background:var(--accent-hover);color:#fff}
+footer{border-top:1px solid var(--line);padding-block:32px calc(32px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--mute)}
+@media (max-width:420px){.back{font-size:12px;letter-spacing:.08em}}
+
+/* 404 */
+.nf{min-height:calc(100vh - 190px)}

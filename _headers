@@ -1,0 +1,16 @@
+# Netlify response headers for every page.
+# CSP: everything is same-origin. No inline scripts or styles (they live in /js and /css),
+# data: images are the small inline SVG icons used as CSS masks/backgrounds,
+# connect-src 'self' covers the reservation form's POST to Netlify Forms.
+# WhatsApp (wa.me), tel: and mailto: are plain links, which the CSP does not restrict.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; manifest-src 'self'; upgrade-insecure-requests
+
+# Font files never change; let browsers keep them for a year.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

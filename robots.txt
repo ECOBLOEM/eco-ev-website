@@ -1,0 +1,5 @@
+# Update the Sitemap URL when the site moves to our own domain.
+User-agent: *
+Allow: /
+
+Sitemap: https://zesty-marzipan-e0d1ee.netlify.app/sitemap.xml
