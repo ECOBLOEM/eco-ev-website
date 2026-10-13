@@ -25,7 +25,7 @@ const MODELS = [
     img:{src:'e5emi-apex-green.webp',fit:'cut',ground:[12,13]},
     feat:['19" low-drag alloy wheels','256-colour ambient lighting','Split-folding rear seat','Ivory White interior option']}
   ]},
- {id:'e5',name:'E5',kind:'ev',groups:['ev'],body:'suv',badge:'Electric',tag:'Midsize electric SUV',plan:'6 yr / 120 000 km',
+ {id:'e5',name:'E5',kind:'ev',groups:['ev'],body:'suv',badge:'Electric',tag:'Midsize electric SUV',home7:'about 9–10 h',plan:'6 yr / 120 000 km',
   blurb:'The flagship electric SUV. 160 kW, a short-blade LFP battery, heat pump and 100 kW DC charging, with up to 450 km of range.',
   labels:{range:'Range (WLTP)',power:'Power',accel:'0–100 km/h',energy:'Battery',extra:'DC fast charge',cover:'Warranty'},
   derivs:[
@@ -282,7 +282,10 @@ const phev=MODELS.find(m=>m.kind==='phev');
 const kwOf=(m,k)=>{const v=new Set(m.derivs.map(d=>d[k].kw));return v.size===1&&[...v][0]?[...v][0]:''};
 const timeGroups=(m,f)=>{const g=new Map();m.derivs.forEach(d=>{const t=f(d);if(t)g.set(t,[...(g.get(t)||[]),d.n])});
   return g.size===1?[...g.keys()][0]:[...g].map(([t,ns])=>`${listJoin(ns)} ${t}`).join(', ')};
-const acLines=MODELS.filter(m=>m.derivs.every(d=>d.ac.h)).map(m=>{const kw=kwOf(m,'ac');return `${m.name}${kw?` (${kw})`:''}: ${timeGroups(m,d=>`about ${d.ac.h} (${d.ac.span})`)}`});
+/* home7: models quoted on a faster charger also get their time on the included 7 kW wall charger */
+const acLines=MODELS.filter(m=>m.derivs.every(d=>d.ac.h)).map(m=>{const kw=kwOf(m,'ac');
+  if(m.home7)return `${m.name}: ${timeGroups(m,d=>`about ${d.ac.h}`)} (${m.derivs[0].ac.span}) on an ${kw.replace('up to ','')} charger. On the included 7&nbsp;kW home charger, allow ${m.home7}, still a full charge overnight`;
+  return `${m.name}${kw?` (${kw})`:''}: ${timeGroups(m,d=>`about ${d.ac.h} (${d.ac.span})`)}`});
 const acNoTime=MODELS.filter(m=>m.derivs.some(d=>!d.ac.h));
 const dcLines=MODELS.map(m=>{const kw=kwOf(m,'dc');const per=m.derivs.some(d=>d.dc.kw)&&!kw;
   return `${m.name}${kw?` (up to ${kw})`:''}: ${timeGroups(m,d=>`about ${d.dc.t}${per?` (up to ${d.dc.kw})`:''}`)}`});
