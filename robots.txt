@@ -1,5 +1,3 @@
-# Update the Sitemap URL when the site moves to our own domain.
+# Site paused: holding page only. Restore the full robots.txt from the full-site branch when the site comes back.
 User-agent: *
-Allow: /
-
-Sitemap: https://zesty-marzipan-e0d1ee.netlify.app/sitemap.xml
+Disallow: /

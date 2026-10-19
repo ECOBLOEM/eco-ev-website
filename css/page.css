@@ -51,3 +51,19 @@ section[id]{scroll-margin-top:24px}
 section:target h2{color:var(--accent)}
 .foot-links a{color:var(--mute)}
 .foot-links a:hover{color:var(--accent)}
+
+/* Holding page (site paused) */
+.holding{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.hold{flex:1;display:grid;place-items:center;text-align:center;padding-block:clamp(56px,12vh,120px)}
+.hold .wrap{display:grid;justify-items:center;gap:22px}
+.hold-logo{width:min(280px,72vw);height:auto;margin-bottom:18px}
+.hold h1{font-size:clamp(32px,6vw,64px);margin:0 0 6px}
+.hold-phones{margin:4px 0 0;color:var(--mute)}
+.hold-phones a{white-space:nowrap}
+.hold .btn{margin-top:0}
+.holding footer{text-align:center}
+/* WhatsApp green with charcoal text: white on #25D366 is only ~2:1 */
+.btn.wa-btn{gap:10px;background:#25D366;color:var(--ink);letter-spacing:.08em}
+.btn.wa-btn:hover{background:#1FBE5B;color:var(--ink)}
+.wa-ico{display:inline-block;flex:none;width:20px;height:20px;background:currentColor;-webkit-mask:var(--wa-mask) center/contain no-repeat;mask:var(--wa-mask) center/contain no-repeat}
+:root{--wa-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z' fill='none' stroke='%23000' stroke-width='1.8' stroke-linejoin='round'/%3E%3Cpath d='M9.1 7.6c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.6 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4l-2.1-1c-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.3z'/%3E%3C/svg%3E")}
