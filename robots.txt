@@ -1,3 +1,6 @@
-# Site paused: holding page only. Restore the full robots.txt from the full-site branch when the site comes back.
+# Site paused (holding page only). Crawling is allowed for now so search engines can
+# revisit the old pages, see the 404s and noindex, and drop them from results.
+# Switch back to "Disallow: /" once the old pages have gone from Google (check from mid-November 2026).
+# When the full site returns, restore robots.txt from the full-site branch instead.
 User-agent: *
-Disallow: /
+Allow: /
